@@ -16,10 +16,14 @@ class Dock
   end
 
   def log_hour
+    @boats_rented
     @boats_rented.each do |boat|
       boat.add_hour
+      boat.hours_rented
     end
+
   end
+
   def revenue
 
   end
