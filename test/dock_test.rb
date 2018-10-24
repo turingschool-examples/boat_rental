@@ -36,4 +36,16 @@ class DockTest < Minitest::Test
     dock.rent(kayak_1, patrick)
     assert_equal [[kayak_1, patrick]], dock.rentals
   end
+
+  def test_a_dock_can_log_rental_hours
+    dock = Dock.new("The Rowing Dock", 3)
+
+    kayak_1 = Boat.new(:kayak, 20)
+
+    patrick = Renter.new("Patrick Star", "4242424242424242")
+
+    dock.rent(kayak_1, patrick)
+
+    assert_equal 1, dock.log_hour
+  end
 end

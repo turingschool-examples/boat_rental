@@ -4,10 +4,17 @@ class Dock
     @name = name
     @max_rental_time = max_rental_time
     @revenue = 0
-    @rentals = []
+    @rentals = {}
   end
 
   def rent(boat, renter)
-    @rentals << [boat, renter]
+    @rentals[boat] = renter
   end
+
+  # def log_hour
+  #   @rentals.each do |rental|
+  #     rental.add_hour
+  #     binding.pry
+  #   end
+  # end
 end
