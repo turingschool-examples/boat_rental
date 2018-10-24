@@ -1,11 +1,11 @@
 class Dock
-  attr_reader :name, :max_rental_time, :revenue
+  attr_reader :name, :max_rental_time, :revenue, :charges
   def initialize(name, max_rental_time)
     @boats_being_rented = {}
     @name = name
     @max_rental_time = max_rental_time
     @revenue = 0
-    @charges = {}
+    @charges = Hash.new(0)
   end
   def rent(boat, renter)
     @boats_being_rented[boat] = renter
@@ -18,7 +18,7 @@ class Dock
   def return(boat)
     credit_card_number = @boats_being_rented[boat].credit_card_number
     amount_charged = boat.hours_rented * boat.price_per_hour
-    @charges[credit_card_number] = amount_charged
+    @charges[credit_card_number] += amount_charged
     @revenue += amount_charged
     @boats_being_rented.delete(boat)
   end

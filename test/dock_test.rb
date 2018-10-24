@@ -79,10 +79,10 @@ class DockTest < Minitest::Test
     @dock.rent(@kayak_1, @patrick)
     @dock.rent(@kayak_2, @patrick)
     @dock.log_hour
-    @dock.return(@kayak_1)
-    @dock.return(@kayak_2)
     @dock.rent(@canoe, @patrick)
     @dock.log_hour
+    @dock.return(@kayak_1)
+    @dock.return(@kayak_2)
     @dock.return(@canoe)
     # Rent Boats out to second Renter
     @dock.rent(@sup_1, @eugene)
@@ -106,10 +106,10 @@ class DockTest < Minitest::Test
     @dock.rent(@kayak_1, @patrick)
     @dock.rent(@kayak_2, @patrick)
     @dock.log_hour
-    @dock.return(@kayak_1)
-    @dock.return(@kayak_2)
     @dock.rent(@canoe, @patrick)
     @dock.log_hour
+    @dock.return(@kayak_1)
+    @dock.return(@kayak_2)
     @dock.return(@canoe)
     # Rent Boats out to second Renter
     @dock.rent(@sup_1, @eugene)
