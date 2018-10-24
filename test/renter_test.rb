@@ -11,4 +11,16 @@ class RenterTest < Minitest::Test
     assert_instance_of Renter, renter
   end
 
+  def test_it_can_get_name
+    renter = Renter.new("Patrick Star", "4242424242424242")
+
+    assert_equal "Patrick Star", renter.name
+  end
+
+  def test_it_can_get_cc_number
+    renter = Renter.new("Patrick Star", "4242424242424242")
+
+    assert_equal "4242424242424242", renter.credit_card_number
+  end
+
 end
