@@ -1,3 +1,4 @@
+require 'pry'
 class Dock
   attr_reader :name, :max_rental_time, :revenue, :rented_boats
   def initialize(name, max_rental_time)
@@ -8,24 +9,28 @@ class Dock
   end
 
   def rent(boat, name)
-    @rented_boats << boat
+    @rented_boats << {boat => name}
   end
 
   def log_hour
     @rented_boats.each do |boat|
-      boat.add_hour
+      boat.keys[0].add_hour
     end
   end
 
   def return(boat)
+  returned_boat = @rented_boats.find do |boat_pair|
+      boat_pair.keys[0] == boat
+    end
     hours_charged = 0
-    if boat.hours_rented >= @max_rental_time
+    if returned_boat.keys[0].hours_rented >= @max_rental_time
       hours_charged = @max_rental_time
     else
-      hours_charged = boat.hours_rented
+      hours_charged = returned_boat.keys[0].hours_rented
     end
-    @revenue += hours_charged * boat.price_per_hour
-    boat.reset_hours
-    @rented_boats.delete(boat)
+    @revenue += hours_charged * returned_boat.keys[0].price_per_hour
+    returned_boat.keys[0].reset_hours
+    @rented_boats.delete(returned_boat)
+
   end
 end

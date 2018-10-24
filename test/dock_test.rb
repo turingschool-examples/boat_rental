@@ -35,7 +35,7 @@ class DockTest < MiniTest::Test
     kayak_1 = Boat.new(:kayak, 20)
     patrick = Renter.new("Patrick Star", "4242424242424242")
 
-    assert_equal [kayak_1], dock.rent(kayak_1, patrick)
+    assert_equal [{kayak_1 => patrick}], dock.rent(kayak_1, patrick)
   end
 
   def test_it_can_log_hours
@@ -44,7 +44,7 @@ class DockTest < MiniTest::Test
     patrick = Renter.new("Patrick Star", "4242424242424242")
     dock.rent(kayak_1, patrick)
     dock.log_hour
-    rented = dock.rented_boats.first.hours_rented
+    rented = dock.rented_boats.first.keys[0].hours_rented
 
     assert_equal 1, rented
   end
@@ -55,7 +55,7 @@ class DockTest < MiniTest::Test
     patrick = Renter.new("Patrick Star", "4242424242424242")
     dock.rent(kayak_1, patrick)
 
-    assert_equal [kayak_1], dock.rented_boats
+    assert_equal [{kayak_1 => patrick}], dock.rented_boats
 
     dock.return(kayak_1)
 
