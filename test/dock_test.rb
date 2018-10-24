@@ -101,8 +101,8 @@ class DockTest < Minitest::Test
     assert_equal expected, @dock.charges
   end
 
-  def test_total_charges_by_rental_type_returns_type_and_hour_pairs
-    skip
+  def test_total_hours_by_rental_type_returns_type_and_hour_pairs
+
     @dock.rent(@kayak_1, @patrick)
     @dock.rent(@kayak_2, @patrick)
     @dock.log_hour
