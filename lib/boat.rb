@@ -8,23 +8,8 @@ class Boat
   end
 
   def add_hour
-    @hours_rented =+ 1
+    add_hour = 1
+    @hours_rented =+ add_hour
   end
-  
+
 end
-
-
-
-
-# pry(main)> kayak.add_hour
-# #=> 1
-#
-# pry(main)> kayak.add_hour
-# #=> 2
-#
-# pry(main)> kayak.add_hour
-# #=> 3
-#
-# pry(main)> kayak.hours_rented
-# #=> 3
-# ```
