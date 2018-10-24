@@ -60,4 +60,16 @@ class DockTest < Minitest::Test
     assert_equal 3, kayak_1.hours_rented
     assert_equal 3, kayak_2.hours_rented
   end
+
+  def test_you_can_return_a_boat
+    dock = Dock.new("The Rowing Dock", 3)
+    kayak_1 = Boat.new(:kayak, 20)
+    kayak_2 = Boat.new(:kayak, 20)
+    patrick = Renter.new("Patrick Star", "4242424242424242")
+    dock.rent(kayak_1, patrick)
+    dock.rent(kayak_2, patrick)
+    dock.return(kayak_1, patrick)
+
+    assert_equal [kayak_2], dock.rented_boats
+  end
 end
