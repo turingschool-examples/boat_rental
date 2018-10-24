@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/boat'
 require './lib/renter'
-require './lib/dock'
+# require './lib/dock'
 
 class RenterTest < Minitest::Test
 
