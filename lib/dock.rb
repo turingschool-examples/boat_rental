@@ -1,7 +1,7 @@
-class Renter
-  attr_reader :name, :credit_card_number
-  def initialize(name, credit_card_number)
+class Dock
+  attr_reader :name, :max_rental_time
+  def initialize(name, max_rental_time)
     @name = name
-    @credit_card_number = credit_card_number
+    @max_rental_time = max_rental_time
   end
 end
