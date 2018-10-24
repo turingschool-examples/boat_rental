@@ -32,4 +32,19 @@ class DockTest < Minitest::Test
     @dock.return(@kayak_2)
     assert_equal 40, @dock.revenue
   end
+
+  def test_log_hour_causes_revenue_to_increase_when_boats_are_rented_accross_hours_with_variable_amounts_of_boats_not_having_been_returned
+    @dock.rent(@kayak_1, @patrick)
+    @dock.rent(@kayak_2, @patrick)
+    @dock.log_hour
+    @dock.return(@kayak_1)
+    @dock.return(@kayak_2)
+    @dock.rent(@canoe, @patrick)
+    @dock.log_hour
+    @dock.return(@kayak_1)
+    @dock.return(@kayak_2)
+    @dock.return(@canoe)
+    # Revenue thus far
+    assert_equal 105, @dock.revenue
+  end
 end
