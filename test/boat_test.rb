@@ -11,7 +11,12 @@ class BoatTest < Minitest::Test
 
   def test_it_has_a_type
     kayak = Boat.new(:kayak, 20)
-    assert_equal :kayak, kayak.type 
+    assert_equal :kayak, kayak.type
   end
+
+  def test_it_has_a_price_per_hr
+    kayak = Boat.new(:kayak, 20)
+    assert_equal 20, kayak.price_per_hr
+  end 
 
 end
