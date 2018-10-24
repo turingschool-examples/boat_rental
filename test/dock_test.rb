@@ -73,4 +73,22 @@ class DockTest < Minitest::Test
     assert_equal 105, dock.revenue
   end
 
+  def test_it_cant_charge_for_more_than_max_rental_hours
+    dock = Dock.new("The Rowing Dock", 3)
+    kayak_1 = Boat.new(:kayak, 20)
+    kayak_2 = Boat.new(:kayak, 20)
+    canoe = Boat.new(:canoe, 25)
+    sup_1 = Boat.new(:standup_paddle_board, 15)
+    sup_2 = Boat.new(:standup_paddle_board, 15)
+    patrick = Renter.new("Patrick Star", "4242424242424242")
+    eugene = Renter.new("Eugene Crabs", "1313131313131313")
+    dock.rent(sup_1, eugene)
+    dock.rent(sup_2, eugene)
+    dock.log_hour
+    dock.log_hour
+    dock.log_hour
+    dock.log_hour
+    assert_equal 90, dock.revenue 
+  end
+
 end
