@@ -46,7 +46,7 @@ class DockTest < Minitest::Test
     @dock.return(@kayak_2)
     @dock.return(@canoe)
 
-    assert_equal 105, dock.revenue
+    assert_equal 105, @dock.revenue
 
   end
 
