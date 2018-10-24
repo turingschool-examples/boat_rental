@@ -1,7 +1,6 @@
 class Boat
   attr_reader :type,
-              :price_per_hour,
-              :hours_rented
+              :price_per_hour
 
   attr_accessor :rented_status, :hours_rented
 

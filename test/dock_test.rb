@@ -34,7 +34,8 @@ class DockTest < Minitest::Test
     kayak_1 = Boat.new(:kayak, 20)
     patrick = Renter.new("Patrick Star", "4242424242424242")
     dock.rent(kayak_1, patrick)
-    assert_equal 1, dock.log_hour
+    dock.log_hour
+    assert_equal 1, kayak_1.hours_rented
   end
 
   def test_it_can_return
@@ -50,8 +51,20 @@ class DockTest < Minitest::Test
   end
 
   def test_it_has_total_revenue
-skip
-    assert_equal f, dock.revenue
+    dock = Dock.new("The Rowing Dock", 3)
+    kayak_1 = Boat.new(:kayak, 20)
+    kayak_2 = Boat.new(:kayak, 20)
+    canoe = Boat.new(:canoe, 25)
+    patrick = Renter.new("Patrick Star", "4242424242424242")
+    dock.rent(kayak_1, patrick)
+    dock.rent(kayak_2, patrick)
+    dock.log_hour
+    dock.rent(canoe, patrick)
+    dock.log_hour
+    dock.return(kayak_1)
+    dock.return(kayak_2)
+    dock.return(canoe)
+    assert_equal 105, dock.revenue
   end
 
 end
@@ -83,13 +96,3 @@ end
 # # Total revenue
 # pry(main)> dock.revenue
 # #=> 195
-
-
-# dock = Dock.new("The Rowing Dock", 3)
-# kayak_1 = Boat.new(:kayak, 20)
-# kayak_2 = Boat.new(:kayak, 20)
-# canoe = Boat.new(:canoe, 25)
-# sup_1 = Boat.new(:standup_paddle_board, 15)
-# sup_2 = Boat.new(:standup_paddle_board, 15)
-# patrick = Renter.new("Patrick Star", "4242424242424242")
-# eugene = Renter.new("Eugene Crabs", "1313131313131313")
