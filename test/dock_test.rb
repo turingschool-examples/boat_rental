@@ -46,6 +46,18 @@ class DockTest < Minitest::Test
   end
 
   def test_it_will_only_charge_to_dock_maximum
+    dock = Dock.new("The Rowing Dock", 3)
+    kayak_1 = Boat.new(:kayak, 20)
+    kayak_2 = Boat.new(:kayak, 20)
+    patrick = Renter.new("Patrick Star", "4242424242424242")
+    dock.rent(kayak_1, patrick)
+    dock.rent(kayak_2, patrick)
+    dock.log_hour
+    dock.log_hour
+    dock.log_hour
+    dock.log_hour
 
+    assert_equal 3, kayak_1.hours_rented
+    assert_equal 3, kayak_2.hours_rented
   end
 end

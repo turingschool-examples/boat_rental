@@ -12,9 +12,13 @@ class Dock
   end
 
   def log_hour
-    add_hour_array = @rented_boats.keys
-    add_hour_array.each do |boat|
-      boat.add_hour
+    rented_boats_array = @rented_boats.keys
+    non_maxed_boats =
+    rented_boats_array.select do |boat|
+      boat.hours_rented < @max_rental_time
+    end
+    non_maxed_boats.each do |boat|
+         boat.add_hour
     end
   end
 
