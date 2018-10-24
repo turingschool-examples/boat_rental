@@ -17,12 +17,13 @@ class RenterTest < Minitest::Test
     assert_equal "Patrick Star", renter.name
   end
 
+  def test_it_has_a_credit_card
+    renter = Renter.new("Patrick Star", "4242424242424242")
+    assert_equal "4242424242424242", renter.credit_card_number
+  end
+
 end
 
-#
-# pry(main)> renter.name
-# #=> "Patrick Star"
-#
 # pry(main)> renter.credit_card_number
 # #=> "4242424242424242"
 #
