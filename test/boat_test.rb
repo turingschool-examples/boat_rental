@@ -21,7 +21,15 @@ class BoatTest < Minitest::Test
 
   def test_it_has_zero_hours_rented_by_default
     kayak = Boat.new(:kayak, 20)
-    assert_equal 0, kayak.hours_rented 
+    assert_equal 0, kayak.hours_rented
+  end
+
+  def test_it_can_add_hours_to_hours_rented
+    kayak = Boat.new(:kayak, 20)
+    kayak.add_hour
+    kayak.add_hour
+    kayak.add_hour
+    assert_equal 3, kayak.hours_rented
   end
 
 end
