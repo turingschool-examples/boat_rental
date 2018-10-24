@@ -38,6 +38,11 @@ class BoatTest < Minitest::Test
     assert_equal 3, kayak.hours_rented
   end
 
+  def test_it_can_be_rented
+    kayak = Boat.new(:kayak, 20)
+    assert kayak.rented?
+  end
+
 
 
 
