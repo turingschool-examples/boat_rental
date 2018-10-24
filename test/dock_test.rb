@@ -42,31 +42,30 @@ class DockTest < Minitest::Test
     eugene = Renter.new("Eugene Crabs", "1313131313131313")
     dock.add_renters(patrick)
     dock.add_renters(eugene)
-    assert_equal 2, dock.total_renters.count
+    assert_equal [patrick, eugene], dock.total_renters
   end
 
-  # def test_renter_can_rent_boats
-  #   dock = Dock.new("The Rowing Dock", 3)
-  #   kayak_1 = Boat.new(:kayak, 20)
-  #   kayak_2 = Boat.new(:kayak, 20)
-  #   patrick = Renter.new("Patrick Star", "4242424242424242")
-  #   dock.rent(kayak_1, patrick)
-  #   dock.rent(kayak_2, patrick)
-  #   dog.log_hour
-  #   canoe = Boat.new(:canoe, 25)
-  #   dock.rent(canoe, patrick)
-  #   dock.log_hour
-  # end
+  def test_renter_can_rent_boats
+    dock = Dock.new("The Rowing Dock", 3)
+    kayak_1 = Boat.new(:kayak, 20)
+    kayak_2 = Boat.new(:kayak, 20)
+    patrick = Renter.new("Patrick Star", "4242424242424242")
+    dock.rent(kayak_1, patrick)
+    dock.rent(kayak_2, patrick)
+    canoe = Boat.new(:canoe, 25)
+    dock.rent(canoe, patrick)
+    assert_equal 3, dock.total_rental_by_person.count
+  end
 
-  # def test_log_hour_adds_one_when_first_called
-  #   dock = Dock.new("The Rowing Dock", 3)
-  #   patrick = Renter.new("Patrick Star", "4242424242424242")
-  #   # eugene = Renter.new("Eugene Crabs", "1313131313131313")
-  #   kayak_1 = Boat.new(:kayak, 20)
-  #   kayak_2 = Boat.new(:kayak, 20)
-  #   dock.rent(kayak_1, patrick)
-  #   dock.rent(kayak_2, patrick)
-  #   assert_equal 1, dock.log_hour
-  # end
+  def test_log_hour_adds_one_when_first_called
+    dock = Dock.new("The Rowing Dock", 3)
+    patrick = Renter.new("Patrick Star", "4242424242424242")
+    # eugene = Renter.new("Eugene Crabs", "1313131313131313")
+    kayak_1 = Boat.new(:kayak, 20)
+    kayak_2 = Boat.new(:kayak, 20)
+    dock.rent(kayak_1, patrick)
+    dock.rent(kayak_2, patrick)
+    assert_equal 1, dock.log_hour
+  end
 
 end
