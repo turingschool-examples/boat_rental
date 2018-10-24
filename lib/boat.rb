@@ -8,8 +8,10 @@ class Boat
   end
 
   def add_hour
-    add_hour = 1
-    @hours_rented =+ add_hour
+      if @hours_rented
+        @hours_rented += 1
+      else @hours_rented
+      end
   end
 
 end
