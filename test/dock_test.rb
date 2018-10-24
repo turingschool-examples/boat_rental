@@ -16,6 +16,7 @@ class DockTest < Minitest::Test
     @patrick = Renter.new("Patrick Star", "4242424242424242")
     @eugene = Renter.new("Eugene Crabs", "1313131313131313")
   end
+
   def test_it_exists
     dock = Dock.new("The Rowing Dock", 3)
     assert_instance_of Dock, dock
@@ -32,8 +33,9 @@ class DockTest < Minitest::Test
   end
 
   def test_it_can_rent_boats
+    assert_equal [], @dock.rented_boats
     @dock.rent(@kayak_1, @patrick)
-    assert_equal [[@kayak_1, @patrick]], @dock.rented_boats
+    assert_equal [{boat: @kayak_1, person: @patrick}], @dock.rented_boats
   end
 
   def test_it_can_log_an_hour
@@ -57,6 +59,8 @@ class DockTest < Minitest::Test
     assert_equal false, @dock.rented?(@kayak_1)
     @dock.rent(@kayak_1, @patrick)
     assert_equal true, @dock.rented?(@kayak_1)
+    @dock.return(@kayak_1)
+    assert_equal false, @dock.rented?(@kayak_1)
   end
 
   def test_it_can_calculate_revenue
@@ -71,10 +75,13 @@ class DockTest < Minitest::Test
     assert_equal 105, @dock.revenue
     @dock.rent(@sup_1, @eugene)
     @dock.rent(@sup_2, @eugene)
-    5.times { dock.log_hour }
+    5.times { @dock.log_hour }
     @dock.return(@sup_1)
     @dock.return(@sup_2)
     assert_equal 195, @dock.revenue
   end
+
+
+
 
 end
