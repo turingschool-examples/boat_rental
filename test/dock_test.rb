@@ -41,18 +41,15 @@ class DockTest < Minitest::Test
     @dock.rent(@kayak_2, @patrick)
     @dock.log_hour
     assert_equal 1, @dock.rental_time
+
     @dock.rent(@canoe, @patrick)
     @dock.log_hour
     @dock.log_hour
     assert_equal 2, @dock.rental_time
+
     @dock.return(@kayak_1)
     @dock.return(@kayak_2)
     @dock.return(@canoe)
-    assert_equal 2, @dock.rental_time
-
     assert_equal 105, @dock.revenue
-
   end
-
-
 end
