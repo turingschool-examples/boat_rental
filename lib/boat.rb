@@ -1,17 +1,10 @@
 class Boat
-  def initialize(boat_type, quantity)
-    @boat_type = boat_type
-    @quantity = quantity 
+  def initialize(type, quantity)
+    @type = type
+    @quantity = quantity
   end
 end
 
-#
-# pry(main)> require './lib/boat'
-# #=> true
-#
-# pry(main)> kayak = Boat.new(:kayak, 20)
-# #=> #<Boat:0x00007fceac8f0480...>
-#
 # pry(main)> kayak.type
 # #=> :kayak
 #

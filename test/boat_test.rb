@@ -8,4 +8,9 @@ class BoatTest < Minitest::Test
 
     assert_instance_of Boat, kayak
   end
+  def test_boat_has_a_type
+    kayak = Boat.new(:kayak, 20)
+
+    assert_equal :kayak, kayak.type
+  end
 end
