@@ -10,13 +10,11 @@ class DockTest < Minitest::Test
   end
 
   def test_it_has_a_name
-skip
     dock = Dock.new("The Rowing Dock", 3)
     assert_equal "The Rowing Dock", dock.name
   end
 
   def test_it_has_max_rental_time
-skip
     dock = Dock.new("The Rowing Dock", 3)
     assert_equal 3, dock.max_rental_time
   end
