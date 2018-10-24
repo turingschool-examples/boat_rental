@@ -16,4 +16,10 @@ class Dock
       rental[:boat].add_hour
     end
   end
+
+  def return(boat)
+    @current_rentals.delete_if do |rental|
+      rental[:boat] == boat
+    end
+  end
 end
