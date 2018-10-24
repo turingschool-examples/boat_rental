@@ -1,4 +1,6 @@
 class Dock
+  attr_reader :name 
   def initialize(name, max_rental_time)
-  end 
+    @name = name
+  end
 end
