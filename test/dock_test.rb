@@ -146,4 +146,17 @@ class DockTest < Minitest::Test
     expected = {:kayak => 4, :canoe => 1, :standup_paddle_board => 10}
     assert_equal expected, @dock.total_hours_by_rental_type
   end
+
+  def test_chargeable_hours
+    @dock.rent(@kayak_1, @patrick)
+    @dock.log_hour
+    @dock.log_hour
+    @dock.log_hour
+    @dock.log_hour
+    @dock.log_hour
+    @dock.log_hour
+    @dock.return(@kayak_1)
+    assert_equal 6, @kayak_1.hours_rented
+    assert_equal 3, @dock.chargeable_hours(@kayak_1)
+  end
 end
