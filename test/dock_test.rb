@@ -17,13 +17,12 @@ class DockTest < Minitest::Test
     assert_equal 3, dock.max_rental_time
   end
 
-  def test_rented_boats_is_initialized_as_empty_array
+  def test_renters_is_initialized_as_empty_array
     dock = Dock.new("The Rowing Dock", 3)
-    assert_equal [], dock.rented_boats
+    assert_equal [], dock.renters
   end
 
   def test_it_can_rent_boat
-    skip
     dock = Dock.new("The Rowing Dock", 3)
     kayak_1 = Boat.new(:kayak, 20)
     kayak_2 = Boat.new(:kayak, 20)
@@ -35,7 +34,27 @@ class DockTest < Minitest::Test
     # Rent Boats out to first Renter
     dock.rent(kayak_1, patrick)
     dock.rent(kayak_2, patrick)
-    assert_equal [] , dock.rented_boats
+    assert_equal [patrick], dock.renters
   end
+
+  def test_it_can_log_hour
+    dock = Dock.new("The Rowing Dock", 3)
+    kayak_1 = Boat.new(:kayak, 20)
+    kayak_2 = Boat.new(:kayak, 20)
+    canoe = Boat.new(:canoe, 25)
+    sup_1 = Boat.new(:standup_paddle_board, 15)
+    sup_2 = Boat.new(:standup_paddle_board, 15)
+    patrick = Renter.new("Patrick Star", "4242424242424242")
+    eugene = Renter.new("Eugene Crabs", "1313131313131313")
+    # Rent Boats out to first Renter
+    dock.rent(kayak_1, patrick)
+    dock.rent(kayak_2, patrick)
+    dock.log_hour
+    assert_equal 1, kayak_1.hours_rented
+    assert_equal 1, kayak_1.hours_rented
+  end
+
+
+
 
 end

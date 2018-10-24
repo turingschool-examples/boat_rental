@@ -3,7 +3,7 @@ require 'minitest/pride'
 require './lib/renter'
 require './lib/boat'
 
-class BoatTest < Minitest::Test
+class RenterTest < Minitest::Test
 
   def test_it_exists
     renter = Renter.new("Patrick Star", "4242424242424242")
@@ -23,9 +23,12 @@ class BoatTest < Minitest::Test
 
   def test_add_boat_adds_boat_to_rented_boats
     renter = Renter.new("Patrick Star", "4242424242424242")
-
-    assert_equal [], renter.rented_boats
-
+    kayak_1 = Boat.new(:kayak, 20)
+    canoe = Boat.new(:canoe, 25)
+    renter.add_boat(kayak_1)
+    assert_equal [kayak_1], renter.rented_boats
+    renter.add_boat(canoe)
+    assert_equal [kayak_1, canoe], renter.rented_boats
   end
 
 
