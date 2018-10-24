@@ -12,7 +12,10 @@ class Dock
   end
 
   def log_hour
-
+    add_hour_array = @rented_boats.keys
+    add_hour_array.each do |boat|
+      boat.add_hour
+    end
   end
 
   def return(boat, renter)
