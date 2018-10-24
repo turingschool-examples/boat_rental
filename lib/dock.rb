@@ -13,9 +13,7 @@ class Dock
     @boats_being_rented[boat] = renter
   end
   def log_hour
-    @boats_being_rented.keys.each do |boat|
-      boat.add_hour
-    end
+    @boats_being_rented.keys.each(&:add_hour)
   end
   def return(boat)
     chargeable_hours = boat.hours_rented < @max_rental_time ? boat.hours_rented : @max_rental_time
