@@ -13,7 +13,7 @@ class Dock
 
   def log_hour
     @rented_boats.each do |boat|
-      @revenue += boat.price_per_hour if boat.hours_rented <= max_rental_time
+      @revenue += boat.price_per_hour if boat.hours_rented < max_rental_time
       boat.hours_rented += 1
     end
   end
@@ -21,7 +21,7 @@ class Dock
   def return(boat)
     return_boat = @rented_boats.find {|rented_boat| rented_boat == boat}
     return_boat.hours_rented = 0
-
+    
     @rented_boats.delete(return_boat)
   end
 end
