@@ -2,6 +2,8 @@ require 'minitest/autorun'
 require 'minitest/pride'
 
 require './lib/dock'
+require './lib/boat'
+require './lib/renter'
 
 class DockTest < Minitest::Test
   def setup
@@ -54,7 +56,7 @@ class DockTest < Minitest::Test
     assert_equal [], @dock.currently_rented_boats
     @dock.rent(@kayak_1, @patrick)
     @dock.return(@kayak_1)
-    assert_equal [@kayak_1], @dock.currently_rented_boats
+    assert_equal [], @dock.currently_rented_boats
   end
 
   def test_it_can_calculate_revenue
@@ -66,7 +68,7 @@ class DockTest < Minitest::Test
     @dock.return(@kayak_1)
     @dock.return(@kayak_2)
     @dock.return(@canoe)
-    assert_equal 105, dock.revenue
+    assert_equal 105, @dock.revenue
   end
 
   def test_it_wont_add_hours_past_max_rental_time
