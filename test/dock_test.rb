@@ -79,5 +79,37 @@ class DockTest < Minitest::Test
     assert_equal 3, @dock.current_rentals[0][:boat].hours_rented
   end
 
+  def test_it_can_track_revenue
+    # Setup
+    kayak_1 = Boat.new(:kayak, 20)
+    kayak_2 = Boat.new(:kayak, 20)    
+    canoe = Boat.new(:canoe, 25)    
+    sup_1 = Boat.new(:standup_paddle_board, 15)    
+    sup_2 = Boat.new(:standup_paddle_board, 15)    
+    patrick = Renter.new("Patrick Star", "4242424242424242")
+    eugene = Renter.new("Eugene Crabs", "1313131313131313")    
+
+    # Rent Boats out to first Renter
+    @dock.rent(kayak_1, patrick)
+    @dock.rent(kayak_2, patrick)
+    @dock.log_hour
+    @dock.rent(canoe, patrick)
+    @dock.log_hour
+    @dock.return(kayak_1)
+    @dock.return(kayak_2)
+    @dock.return(canoe)
+    # Revenue thus far
+    assert_equal 105, @dock.revenue
+    # Rent Boats out to second Renter
+    @dock.rent(sup_1, eugene)
+    @dock.rent(sup_2, eugene)
+    3.times { @dock.log_hour }
+    # Any hours rented past the max rental time are not counted
+    2.times { @dock.log_hour }
+    @dock.return(sup_1)
+    @dock.return(sup_2)
+    # Total revenue
+    assert_equal 195, @dock.revenue
+  end
 
 end
