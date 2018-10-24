@@ -103,4 +103,32 @@ class DockTest < Minitest::Test
     expected = {"4242424242424242" => 105, "1313131313131313" => 90}
     assert_equal expected, @dock.charges
   end
+
+  def test_charges_returns_credit_card_and_amount_charged_per_renter
+    @dock.rent(@kayak_1, @patrick)
+    @dock.rent(@kayak_2, @patrick)
+    @dock.log_hour
+    @dock.return(@kayak_1)
+    @dock.return(@kayak_2)
+    @dock.rent(@canoe, @patrick)
+    @dock.log_hour
+    @dock.return(@kayak_1)
+    @dock.return(@kayak_2)
+    @dock.return(@canoe)
+    # Rent Boats out to second Renter
+    @dock.rent(@sup_1, @eugene)
+    @dock.rent(@sup_2, @eugene)
+    @dock.log_hour
+    @dock.log_hour
+    @dock.log_hour
+    # Any hours rented past the max rental time are not counted
+    @dock.log_hour
+    @dock.log_hour
+    @dock.return(@sup_1)
+    @dock.return(@sup_2)
+    # Total revenue
+    @dock.revenue
+    expected = {:kayak => 4, :canoe => 1, :standup_paddle_board => 10}
+    assert_equal expected, @dock.total_hours_by_rental_type
+  end
 end
