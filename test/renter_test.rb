@@ -2,7 +2,7 @@ require './lib/renter'
 require 'minitest/autorun'
 require 'minitest/pride'
 
-class RenterTest < Mintest::Test
+class RenterTest < Minitest::Test
   def setup
     @renter = Renter.new("Patrick Star", "4242424242424242")
   end

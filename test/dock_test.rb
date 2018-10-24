@@ -150,4 +150,17 @@ class DockTest < Minitest::Test
     assert_equal 0, @kayak_1.hours_rented
     assert_equal 0, @kayak_1.hours_rented
   end
+
+  def test_it_returns_charges_hash
+    @dock.rent(@kayak_1, @patrick)
+    @dock.rent(@kayak_2, @patrick)
+
+    @dock.log_hour
+
+    @dock.rent(@canoe, @patrick)
+
+    @dock.log_hour
+
+    @dock.return
+  end
 end

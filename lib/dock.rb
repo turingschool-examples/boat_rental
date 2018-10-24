@@ -5,6 +5,7 @@ class Dock
     @max_rental_time = max_rental_time
     @rented_boats = []
     @revenue = 0
+    @charges = {}
   end
 
   def rent(boat, renter)
@@ -24,8 +25,16 @@ class Dock
     return_boat = @rented_boats.find do |rented_boat_hash|
       rented_boat_hash[:boat] == boat
     end
+
+    update_charges(return_boat)
     return_boat[:boat].hours_rented = 0
 
     @rented_boats.delete(return_boat)
+  end
+
+  def update_charges(return_boat)
+    renter_card_number, boat = return_boat[:renter_card_info], return_boat[:boat]
+    
+    @charges[new_charge[]]
   end
 end
