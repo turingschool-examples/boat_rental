@@ -41,14 +41,6 @@ class BoatTest < Minitest::Test
 
 
 
-  # pry(main)> kayak.add_hour
-  # #=> 2
-  #
-  # pry(main)> kayak.add_hour
-  # #=> 3
-  #
-  # pry(main)> kayak.hours_rented
-  # #=> 3
 
 
 
