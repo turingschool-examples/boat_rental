@@ -8,20 +8,24 @@ class Dock
   end
 
   def rent(boat, renter)
-    @rented_boats << boat
+    @rented_boats << {boat: boat, renter_card_info: renter.credit_card_number}
   end
 
   def log_hour
-    @rented_boats.each do |boat|
-      @revenue += boat.price_per_hour if boat.hours_rented < max_rental_time
-      boat.hours_rented += 1
+    @rented_boats.each do |boat_hash|
+      if boat_hash[:boat].hours_rented < max_rental_time
+        @revenue += boat_hash[:boat].price_per_hour
+      end
+      boat_hash[:boat].hours_rented += 1
     end
   end
 
   def return(boat)
-    return_boat = @rented_boats.find {|rented_boat| rented_boat == boat}
-    return_boat.hours_rented = 0
-    
+    return_boat = @rented_boats.find do |rented_boat_hash|
+      rented_boat_hash[:boat] == boat
+    end
+    return_boat[:boat].hours_rented = 0
+
     @rented_boats.delete(return_boat)
   end
 end
