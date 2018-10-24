@@ -1,6 +1,5 @@
 require './lib/boat'
 require './lib/renter'
-require './lib/dock'
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'pry'

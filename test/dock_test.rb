@@ -1,4 +1,6 @@
 require './lib/boat'
+require './lib/dock'
+require './lib/renter'
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'pry'
@@ -12,9 +14,6 @@ class DockTest < Minitest::Test
 
 end
 
-# pry(main)>
-# #=> #<Dock:0x00007fb5efb36148...>
-#
 # pry(main)> dock.name
 # #=> "The Rowing Dock"
 #
