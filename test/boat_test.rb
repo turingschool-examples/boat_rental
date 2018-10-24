@@ -17,4 +17,10 @@ class BoatTest < Minitest::Test
     kayak = Boat.new(:kayak, 20)
     assert_equal 20, kayak.price_per_hour
   end
+
+  def test_hours_rented_defaults_to_zero
+    kayak = Boat.new(:kayak, 20)
+    assert_equal 0, kayak.hours_rented
+  end
+
 end
