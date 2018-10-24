@@ -38,9 +38,8 @@ attr_reader :name, :max_rental_time, :log_hour, :boats, :renters
   end
 
   def revenue
-    revenue = 0
-    @boats.each do |boat|
-      revenue = @price_per_hour * @rented_hours
+    revenue = @boats.map do |boat|
+      boat.price_per_hour * boat.rented_hours
     end
     revenue.sum
   end
