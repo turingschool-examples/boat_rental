@@ -17,6 +17,27 @@ class DockTest < Minitest::Test
     @eugene = Renter.new("Eugene Crabs", "1313131313131313")
   end
 
+  def helper_patrick
+    @dock.rent(@kayak_1, @patrick)
+    @dock.rent(@kayak_2, @patrick)
+    @dock.log_hour
+    @dock.rent(@canoe, @patrick)
+    @dock.log_hour
+    @dock.return(@kayak_1)
+    @dock.return(@kayak_2)
+    @dock.return(@canoe)
+  end
+
+  def helper_eugene
+    @dock.rent(@sup_1, @eugene)
+    @dock.rent(@sup_2, @eugene)
+    5.times do
+      @dock.log_hour
+    end
+    @dock.return(@sup_1)
+    @dock.return(@sup_2)
+  end
+
   def test_it_exists
     assert_instance_of Dock, @dock
   end
@@ -60,14 +81,7 @@ class DockTest < Minitest::Test
   end
 
   def test_it_can_calculate_revenue
-    @dock.rent(@kayak_1, @patrick)
-    @dock.rent(@kayak_2, @patrick)
-    @dock.log_hour
-    @dock.rent(@canoe, @patrick)
-    @dock.log_hour
-    @dock.return(@kayak_1)
-    @dock.return(@kayak_2)
-    @dock.return(@canoe)
+    helper_patrick
     assert_equal 105, @dock.revenue
   end
 
@@ -77,5 +91,17 @@ class DockTest < Minitest::Test
       @dock.log_hour
     end
     assert_equal 3, @kayak_1.hours_rented
+  end
+
+  def test_it_stores_charges_per_renter
+    helper_patrick
+    helper_eugene
+    expected = {"4242424242424242" => 105, "1313131313131313" => 90}
+    assert_equal expected, @dock.charges
+  end
+
+  def test_it_hols_total_hours_per_rental_type
+    expected = {:kayak => 4, :canoe => 1, :standup_paddle_board => 10}
+    assert_equal expected, @dock.total_hours_by_rental_type
   end
 end
