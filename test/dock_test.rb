@@ -1,9 +1,9 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 
-require './lib/deck'
+require './lib/dock'
 
-class DeckTest < Minitest::Test
+class DockTest < Minitest::Test
   def setup
     @dock = Dock.new("The Rowing Dock", 3)
   end
@@ -13,10 +13,10 @@ class DeckTest < Minitest::Test
   end
 
   def test_it_has_a_name
-    assert_equal "The Rowing Dock", dock.name
+    assert_equal "The Rowing Dock", @dock.name
   end
 
   def test_it_has_a_max_rental_time
-    assert_equal 3, dock.max_rental_time
+    assert_equal 3, @dock.max_rental_time
   end
 end
