@@ -22,4 +22,17 @@ class MerchantTest < Minitest::Test
   def test_it_starts_at_0_hours_rented
     assert_equal 0, @kayak.hours_rented
   end
+  
+  def test_it_can_add_an_hour_of_being_rented
+    assert_equal 0, @kayak.hours_rented
+
+    @kayak.add_hour
+
+    assert_equal 1, @kayak.hours_rented
+
+    @kayak.add_hour
+    @kayak.add_hour
+
+    assert_equal 3, @kayak.hours_rented
+  end
 end
