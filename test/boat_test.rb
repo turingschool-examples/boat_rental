@@ -1,6 +1,7 @@
 require "minitest/autorun"
 require "minitest/pride"
 require "./lib/boat"
+
 class BoatTest < Minitest::Test
   def test_it_exists
     boat = Boat.new(:kayak, 20)
@@ -15,21 +16,18 @@ class BoatTest < Minitest::Test
   end
 
   def test_it_has_hourly_cost
-    skip
     boat = Boat.new(:kayak, 20)
 
     assert_equal 20, boat.price_per_hour
   end
 
   def test_its_hours_rented_starts_at_0
-    skip
     boat = Boat.new(:kayak, 20)
 
     assert_equal 0, boat.hours_rented
   end
 
   def test_it_can_be_rented_by_the_hour
-    skip
     boat = Boat.new(:kayak, 20)
     boat.add_hour
 
