@@ -24,4 +24,12 @@ class DockTest < Minitest::Test
   def test_it_can_be_initialized_with_max_rental_time
     assert_equal 3, @dock.max_rental_time
   end
+  def test_log_hour_causes_revenue_to_increase_when_boats_are_rented
+    @dock.rent(@kayak_1, @patrick)
+    @dock.rent(@kayak_2, @patrick)
+    @dock.log_hour
+    @dock.return(@kayak_1, @patrick)
+    @dock.return(@kayak_2, @patrick)
+    assert_equal 40, @dock.revenue
+  end
 end
