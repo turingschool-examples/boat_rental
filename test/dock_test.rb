@@ -47,4 +47,32 @@ class DockTest < Minitest::Test
     # Revenue thus far
     assert_equal 105, @dock.revenue
   end
+
+
+  def test_log_hour_with_second_customer_renting_past_max_but_not_being_charged_for_overage
+    @dock.rent(@kayak_1, @patrick)
+    @dock.rent(@kayak_2, @patrick)
+    @dock.log_hour
+    @dock.return(@kayak_1)
+    @dock.return(@kayak_2)
+    @dock.rent(@canoe, @patrick)
+    @dock.log_hour
+    @dock.return(@kayak_1)
+    @dock.return(@kayak_2)
+    @dock.return(@canoe)
+    # Rent Boats out to second Renter
+    @dock.rent(@sup_1, @eugene)
+    @dock.rent(@sup_2, @eugene)
+    @dock.log_hour
+    @dock.log_hour
+    @dock.log_hour
+    # Any hours rented past the max rental time are not counted
+    @dock.log_hour
+    @dock.log_hour
+    @dock.return(@sup_1)
+    @dock.return(@sup_2)
+    # Total revenue
+    @dock.revenue
+    assert_equal 195, @dock.revenue
+  end
 end
