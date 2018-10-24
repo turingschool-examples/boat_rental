@@ -6,21 +6,21 @@ class Dock
   def initialize(name, max_rental_time)
     @name = name
     @max_rental_time = max_rental_time
-    @renters = {}
-    @log_hour = 0
   end
 
   def rent(boat, renter)
-    @renters[boat] = renter
-    @renters
+    boat.rented_status = true
   end
 
-  # def return(boat, renter)
-  #   @renters.delete(boat)
-  # end
+  def return(boat)
+    boat.rented_status = false
+  end
 
   def log_hour
-    @log_hour += 1
+    require 'pry';binding.pry
+    if boat.rented_status == true
+      boat.hours_rented += 1
+    end
   end
 
 #   When the Dock's rent method is called, it begins tracking
@@ -30,8 +30,5 @@ class Dock
 # Every time the Dock's log_hour method is called, any
 # Boat that has been rented but not returned is considered
 # to have been rented an additional hour.
-
-
-
 
 end

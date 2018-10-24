@@ -25,7 +25,8 @@ class DockTest < Minitest::Test
     dock = Dock.new("The Rowing Dock", 3)
     kayak_1 = Boat.new(:kayak, 20)
     patrick = Renter.new("Patrick Star", "4242424242424242")
-    assert_equal ({kayak_1 => patrick}), dock.rent(kayak_1, patrick)
+    dock.rent(kayak_1, patrick)
+    assert_equal true, kayak_1.rented_status
   end
 
   def test_it_can_log_hours
@@ -36,18 +37,24 @@ class DockTest < Minitest::Test
     assert_equal 1, dock.log_hour
   end
 
-  # def test_it_can_return
-  #   dock = Dock.new("The Rowing Dock", 3)
-  #   kayak_1 = Boat.new(:kayak, 20)
-  #   patrick = Renter.new("Patrick Star", "4242424242424242")
-  #   dock.rent(kayak_1, patrick)
-  #   assert_equal ({}), dock.return(kayak_1)
-  # end
+  def test_it_can_return
+    dock = Dock.new("The Rowing Dock", 3)
+    kayak_1 = Boat.new(:kayak, 20)
+    dock.return(kayak_1)
+    assert_equal false, kayak_1.rented_status
+  end
+
+  def test_it_does_not_count_past_max_rental_time
+    skip
+    assert_equal
+  end
+
+  def test_it_has_total_revenue
+skip
+    assert_equal f, dock.revenue
+  end
 
 end
-
-# pry(main)> dock.log_hour
-
 
 # # Revenue thus far
 # pry(main)> dock.revenue
