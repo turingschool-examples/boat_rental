@@ -13,7 +13,8 @@ class Dock
 
   def log_hour
     @current_rentals.each do |rental|
-      rental[:boat].add_hour
+      boat = rental[:boat]
+      boat.add_hour if boat.hours_rented < @max_rental_time
     end
   end
 
