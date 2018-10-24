@@ -3,7 +3,7 @@ class Dock
 
   def initialize(name, max_rental_time)
     @name = name
-    @max_rental_time = max_rental_time
+    @max_rental_time = 3
     @revenue = 0
     @boats = {}
 
@@ -20,7 +20,10 @@ class Dock
   end
 
   def return(boat)
-    @revenue
+    @boats.each do |boat, rented|
+      boat.hours_rented = 0
+      binding.pry
+    end
   end
 
   def revenue
@@ -32,6 +35,20 @@ class Dock
 
 end
 
+
+# def return(boat)
+#   boat
+# end
+#
+# def revenue
+#   boat_array = @boats.map do |boat, renter|
+#     if boat.hours_rented > dock.max_rental_time
+#       boat.hours_rented == 3
+#      @revenue += boat.hours_rented * boat.price_per_hour
+#    end
+#    boat_array.last
+# end
+#
 
 
 
