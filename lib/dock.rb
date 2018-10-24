@@ -18,6 +18,14 @@ class Dock
   end
 
   def return(boat)
+    hours_charged = 0
+    if boat.hours_rented >= @max_rental_time
+      hours_charged = @max_rental_time
+    else
+      hours_charged = boat.hours_rented
+    end
+    @revenue += hours_charged * boat.price_per_hour
+    boat.reset_hours
     @rented_boats.delete(boat)
   end
 end
