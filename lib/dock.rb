@@ -10,7 +10,9 @@ class Dock
     @boats_being_rented << boat
   end
   def log_hour
-    @boats_being_rented.each(&:add_hour)
+    @boats_being_rented.each do |boat|
+      boat.add_hour unless boat.hours_rented >= @max_rental_time
+    end
   end
   def return(boat)
     @revenue += boat.hours_rented * boat.price_per_hour

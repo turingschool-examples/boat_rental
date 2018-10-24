@@ -49,7 +49,7 @@ class DockTest < Minitest::Test
   end
 
 
-  def test_log_hour_with_second_customer_renting_past_max_but_not_being_charged_for_overage
+  def test_log_hour_with_second_customer_renting_past_max_but_not_being_charged_for_extra
     @dock.rent(@kayak_1, @patrick)
     @dock.rent(@kayak_2, @patrick)
     @dock.log_hour
