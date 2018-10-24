@@ -62,6 +62,31 @@ class DockTest < Minitest::Test
     assert_equal 105, @dock.revenue
   end
 
+  def test_logging_hours_past_max_rental_time_does_not_charge_boat_and_update_revenue
+    assert_equal 0, @dock.revenue
+
+    @dock.rent(@kayak_1, @patrick)
+    @dock.rent(@kayak_2, @patrick)
+    @dock.log_hour
+
+    assert_equal 40, @dock.revenue
+
+    @dock.rent(@canoe, @patrick)
+    @dock.log_hour
+
+    assert_equal 105, @dock.revenue
+
+    @dock.log_hour
+
+    assert_equal 170, @dock.revenue
+
+    @dock.log_hour
+    @dock.log_hour
+    @dock.log_hour
+
+    assert_equal 195, @dock.revenue
+  end
+
   def test_return_removes_boat_from_rented_boats
     @dock.rent(@kayak_1, @patrick)
     @dock.rent(@kayak_2, @patrick)
