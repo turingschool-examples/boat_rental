@@ -16,4 +16,8 @@ class Dock
       boat.add_hour
     end
   end
+
+  def return(boat)
+    @rented_boats.delete(boat)
+  end
 end
