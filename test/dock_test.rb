@@ -28,43 +28,40 @@ class DockTest < Minitest::Test
     ringo = Renter.new("Ringo Star", "4242424242424242")
     kayak_1 = Boat.new(:kayak, 20)
     dock.rent(kayak_1, ringo)
-    binding.pry
 
     assert_instance_of Renter, dock.renters.last
     assert_instance_of Boat, dock.boats.last
   end
 
   def test_dock_can_log_hours
-    skip
     dock = Dock.new("The Rowing Dock", 3)
     ringo = Renter.new("Ringo Star", "4242424242424242")
     kayak_1 = Boat.new(:kayak, 20)
-    dock.rent(ringo, kayak)
+    dock.rent(kayak_1, ringo)
     dock.log_hour
 
-    assert_equal 1, dock.boats[:kayak_1].hours_rented
+    assert_equal 1, dock.boats[0].hours_rented
   end
 
   def test_dock_can_return_boats
-    skip
     dock = Dock.new("The Rowing Dock", 3)
     ringo = Renter.new("Ringo Star", "4242424242424242")
     kayak_1 = Boat.new(:kayak, 20)
-    dock.rent(ringo, kayak)
+    dock.rent(kayak_1, ringo)
 
-    assert_nil boats.find(:kayak_1)
+    assert_equal kayak_1, dock.return(kayak_1)
   end
 
-  def test_dock_can_count_revenue
-    skip
+  def test_dock_can_count_revenue_and_that_it_deletes_if_boat_has_overstayed
     dock = Dock.new("The Rowing Dock", 3)
     ringo = Renter.new("Ringo Star", "4242424242424242")
     kayak_1 = Boat.new(:kayak, 20)
-    dock.rent(ringo, kayak)
+    dock.rent(kayak_1, ringo)
     dock.log_hour
     dock.log_hour
-    dock.log_hour
-    dock.log_hour
+    dock.log_hour # should add 20 to 40 (60)
+    dock.log_hour # shouldn't add anything 
+
 
     assert_equal 60, dock.revenue
   end
