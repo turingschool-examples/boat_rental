@@ -68,31 +68,3 @@ class DockTest < Minitest::Test
   end
 
 end
-
-# # Revenue thus far
-# pry(main)> dock.revenue
-# #=> 105
-#
-# # Rent Boats out to second Renter
-# pry(main)> dock.rent(sup_1, eugene)
-#
-# pry(main)> dock.rent(sup_2, eugene)
-#
-# pry(main)> dock.log_hour
-#
-# pry(main)> dock.log_hour
-#
-# pry(main)> dock.log_hour
-#
-# # Any hours rented past the max rental time are not counted
-# pry(main)> dock.log_hour
-#
-# pry(main)> dock.log_hour
-#
-# pry(main)> dock.return(sup_1)
-#
-# pry(main)> dock.return(sup_2)
-#
-# # Total revenue
-# pry(main)> dock.revenue
-# #=> 195
