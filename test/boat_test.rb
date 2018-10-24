@@ -16,23 +16,10 @@ class BoatTest < Minitest::Test
     assert_equal 0, @boat.hours_rented
   end
   def test_add_hour_adds_hour_to_hours_rented
-    @boat.add_hour
-    assert_equal 1, @boat.hours_rented
+
+    assert_equal 1, @boat.add_hour
+    assert_equal 2, @boat.add_hour
+    assert_equal 3, @boat.add_hour
+    assert_equal 3, @boat.hours_rented
   end
 end
-
-# pry(main)> kayak.hours_rented
-# #=> 0
-#
-# pry(main)> kayak.add_hour
-# #=> 1
-#
-# pry(main)> kayak.add_hour
-# #=> 2
-#
-# pry(main)> kayak.add_hour
-# #=> 3
-#
-# pry(main)> kayak.hours_rented
-# #=> 3
-# ```
