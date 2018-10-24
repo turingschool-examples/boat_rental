@@ -4,7 +4,8 @@ class Dock
                 :max_rental_time,
                 :revenue,
                 :active_boat_hours_rented,
-                :in_the_water
+                :in_the_water,
+                :charges
 
   def initialize(name, max_rental_time)
     @name = name
@@ -12,10 +13,14 @@ class Dock
     @revenue = 0
     @active_boat_hours_rented = 0
     @in_the_water = []
+    @charges = {}
   end
 
   def rent(boat, renter)
     @in_the_water << boat
+    if @charges.keys.include?(renter) == false
+      @charges[renter] = renter.credit_card_number
+    end
   end
 
   def log_hour
@@ -23,6 +28,7 @@ class Dock
     if @active_boat_hours_rented <= @max_rental_time
       summed_hours = @in_the_water.sum {|boat| boat.price_per_hour }
       @revenue += summed_hours
+      @charges.
     end
   end
 
@@ -33,7 +39,5 @@ class Dock
       @active_boat_hours_rented = 0
     end
   end
-
-
 
 end
