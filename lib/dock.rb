@@ -11,23 +11,19 @@ class Dock
 
 
   def log_hour
-    while @hours < @max_rental_time
+    if @hours < @max_rental_time
       @hours += 1
     end
-    @hours
+    #this needs to be per boat
+    #this is why my test isn't passing
   end
 
   def rent(boat, renter)
-    log_hour
+
   end
 
   def charge_for_boat(boat)
     @revenue += boat.price_per_hour * @hours
-    binding.pry
-  end
-
-  def return(boat)
-    @hours = @hours
   end
 
 
