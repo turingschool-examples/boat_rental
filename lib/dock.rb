@@ -1,6 +1,6 @@
 class Dock
   
-  attr_reader :name, :max_rental_time, :revenue, :rented_boats
+  attr_reader :name, :max_rental_time, :rented_boats
   def initialize(name, max_rental_time)
     @name = name
     @max_rental_time = max_rental_time
@@ -22,7 +22,15 @@ class Dock
     returned_boat = @rented_boats.find do |r_boat|
       r_boat[:boat] == boat
     end
+    @revenue += returned_boat[:boat].price_per_hour * returned_boat[:boat].hours_rented
     @rented_boats.delete(returned_boat)
+  end
+  
+  def revenue
+    @rented_boats.each do |r_boat|
+      @revenue += r_boat[:boat].price_per_hour * r_boat[:boat].hours_rented
+    end
+    @revenue
   end
   
 end

@@ -55,7 +55,6 @@ class DockTest < Minitest::Test
     
     
     def test_it_can_calculate_revenue
-      skip
       dock = Dock.new("The Rowing Dock", 3)
       kayak_1 = Boat.new(:kayak, 20)
       kayak_2 = Boat.new(:kayak, 20)    
