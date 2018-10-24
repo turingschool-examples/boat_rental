@@ -17,4 +17,11 @@ class Dock
       boat.hours_rented += 1
     end
   end
+
+  def return(boat)
+    return_boat = @rented_boats.find {|rented_boat| rented_boat == boat}
+    return_boat.hours_rented = 0
+
+    @rented_boats.delete(return_boat)
+  end
 end
