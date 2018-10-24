@@ -34,6 +34,16 @@ class DockTest < Minitest::Test
     assert_equal [{:type => kayak_1 ,:renter => patrick }], dock.rent(kayak_1, patrick)
   end
 
+  def test_it_can_log_one_hour
+    dock = Dock.new("The Rowing Dock", 3)
+    kayak_1 = Boat.new(:kayak, 20)
+    patrick = Renter.new("Patrick Star", "4242424242424242")
+    dock.rent(kayak_1, patrick)
+    dock.log_hour
+    dock.log_hour
+    assert_equal 2, dock.log_hour
+  end
+
   def test_it_can_rent_one_boat
   skip
   dock = Dock.new("The Rowing Dock", 3)

@@ -12,6 +12,9 @@ class Dock
   end
 
   def log_hour
+  @rentals.each do |rental|
+    rental[0][:type].add_hour
+    end
   end
 
   def return(type)
