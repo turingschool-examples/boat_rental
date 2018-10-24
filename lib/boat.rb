@@ -1,4 +1,9 @@
-
+class Boat
+  def initialize(boat_type, quantity)
+    @boat_type = boat_type
+    @quantity = quantity 
+  end
+end
 
 #
 # pry(main)> require './lib/boat'
