@@ -27,7 +27,6 @@ class DockTest < Minitest::Test
     patrick = Renter.new("Patrick Star", "4242424242424242")
     dock.rent(kayak_1, patrick)
     assert_equal [kayak_1], dock.rented_boats
-    assert_equal [patrick], dock.renters
   end
 
   def test_it_can_rent_and_return_boat
@@ -47,9 +46,7 @@ class DockTest < Minitest::Test
     dock.return(kayak_1)
     dock.return(kayak_2)
     dock.return(canoe)
-    expected = []
-    assert_equal expected, dock.rented_boats
-    assert_equal [40, 40, 25], dock.charges
+    assert_equal 105, dock.revenue
     assert_equal 2, kayak_1.hours_rented
   end
 
@@ -121,6 +118,37 @@ class DockTest < Minitest::Test
     dock.return(sup_1)
     dock.return(sup_2)
     assert_equal 195, dock.revenue
+  end
+
+  def test_it_can_track_revenue_for_separate_renters
+    skip
+    dock = Dock.new("The Rowing Dock", 3)
+    kayak_1 = Boat.new(:kayak, 20)
+    kayak_2 = Boat.new(:kayak, 20)
+    canoe = Boat.new(:canoe, 25)
+    sup_1 = Boat.new(:standup_paddle_board, 15)
+    sup_2 = Boat.new(:standup_paddle_board, 15)
+    patrick = Renter.new("Patrick Star", "4242424242424242")
+    eugene = Renter.new("Eugene Crabs", "1313131313131313")
+    dock.rent(kayak_1, patrick)
+    dock.rent(kayak_2, patrick)
+    dock.log_hour
+    dock.rent(canoe, patrick)
+    dock.log_hour
+    dock.return(kayak_1)
+    dock.return(kayak_2)
+    dock.return(canoe)
+    dock.rent(sup_1, eugene)
+    dock.rent(sup_2, eugene)
+    dock.log_hour
+    dock.log_hour
+    dock.log_hour
+    dock.log_hour
+    dock.log_hour
+    dock.return(sup_1)
+    dock.return(sup_2)
+    expected = {"4242424242424242" => 105, "1313131313131313" => 90}
+    assert_equal expected, dock.charges
   end
 
 end
