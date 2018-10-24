@@ -45,18 +45,18 @@ class Dock
     total.sum
   end
 
-  def charges
-    charges_by_card = {}
-    @renters.each do |renter, boats|
-      charges_by_card[renter.credit_card_number] => boats.map do |boat|
-        if boat.hours_rented > @max_rental_time
-          @max_rental_time * boat.price_per_hr
-        else
-          boat.hours_rented * boat.price_per_hr
-        end
-      end
-    end
-    
-  end
+  # def charges
+  #   charges_by_card = {}
+  #   @renters.each do |renter, boats|
+  #     charges_by_card[renter.credit_card_number] => boats.map do |boat|
+  #       if boat.hours_rented > @max_rental_time
+  #         @max_rental_time * boat.price_per_hr
+  #       else
+  #         boat.hours_rented * boat.price_per_hr
+  #       end
+  #     end
+  #   end
+  #
+  # end
 
 end

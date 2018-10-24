@@ -121,6 +121,7 @@ class DockTest < Minitest::Test
   end
 
   def test_it_can_track_revenue_for_separate_renters
+    skip
     dock = Dock.new("The Rowing Dock", 3)
     kayak_1 = Boat.new(:kayak, 20)
     kayak_2 = Boat.new(:kayak, 20)
