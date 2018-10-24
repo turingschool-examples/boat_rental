@@ -13,5 +13,4 @@ class Boat
     @hours_rented += 1
   end
 
-
 end
