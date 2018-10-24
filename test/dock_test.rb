@@ -120,7 +120,7 @@ class DockTest < Minitest::Test
     dock.log_hour
     dock.return(sup_1)
     dock.return(sup_2)
-    assert_equal 195, dock.revenue 
+    assert_equal 195, dock.revenue
   end
 
 end
