@@ -33,12 +33,22 @@ class DockTest < MiniTest::Test
     dock.rent(kayak_1, patrick)
     dock.rent(kayak_2, patrick)
     dock.log_hour
-    assert_equal 4, dock.log_hour
+    assert_equal 2, dock.log_hour
   end
 
-  
-
-
+def test_revenue_can_be_calculated
+    dock = Dock.new("The Rowing Dock", 3)
+    kayak_1 = Boat.new(:kayak, 20)
+    kayak_2 = Boat.new(:kayak, 20)
+    canoe = Boat.new(:canoe, 25)
+    patrick = Renter.new("Patrick Star", "4242424242424242")
+    dock.rent(kayak_1, patrick)
+    dock.rent(kayak_2, patrick)
+    dock.log_hour
+    dock.rent(canoe, patrick)
+    dock.log_hour
+    assert_equal 105, dock.revenue
+end
 
 
 
