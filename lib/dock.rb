@@ -14,4 +14,8 @@ class Dock
     @rented_boats << [boat, boat.hours_rented, renter]
   end
 
-end 
+  def return(boat)
+    
+  end
+
+end
