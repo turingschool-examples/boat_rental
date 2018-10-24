@@ -35,7 +35,7 @@ class DockTest < Minitest::Test
   def test_it_can_rent_boats
     assert_equal [], @dock.rented_boats
     @dock.rent(@kayak_1, @patrick)
-    assert_equal [{boat: @kayak_1, person: @patrick}], @dock.rented_boats
+    assert_equal [{boat: @kayak_1, renter: @patrick}], @dock.rented_boats
   end
 
   def test_it_can_log_an_hour
@@ -58,9 +58,12 @@ class DockTest < Minitest::Test
   def test_it_can_return_a_boat
     assert_equal false, @dock.rented?(@kayak_1)
     @dock.rent(@kayak_1, @patrick)
+    @dock.log_hour
     assert_equal true, @dock.rented?(@kayak_1)
     @dock.return(@kayak_1)
     assert_equal false, @dock.rented?(@kayak_1)
+    @dock.rent(@kayak_1, @patrick)
+    assert_equal 0, @dock.hours_logged_by_boat(@kayak_1)
   end
 
   def test_it_can_calculate_revenue
@@ -81,7 +84,40 @@ class DockTest < Minitest::Test
     assert_equal 195, @dock.revenue
   end
 
+  def test_it_can_return_charges_per_credit_card
+    @dock.rent(@kayak_1, @patrick)
+    @dock.rent(@kayak_2, @patrick)
+    @dock.log_hour
+    @dock.rent(@canoe, @patrick)
+    @dock.log_hour
+    @dock.return(@kayak_1)
+    @dock.return(@kayak_2)
+    @dock.return(@canoe)
+    @dock.rent(@sup_1, @eugene)
+    @dock.rent(@sup_2, @eugene)
+    5.times { @dock.log_hour }
+    @dock.return(@sup_1)
+    @dock.return(@sup_2)
+    expected = {"4242424242424242" => 105, "1313131313131313" => 90}
+    assert_equal expected, @dock.charges
+  end
 
-
+  def test_it_returns_total_hours_by_rental_type
+    @dock.rent(@kayak_1, @patrick)
+    @dock.rent(@kayak_2, @patrick)
+    @dock.log_hour
+    @dock.rent(@canoe, @patrick)
+    @dock.log_hour
+    @dock.return(@kayak_1)
+    @dock.return(@kayak_2)
+    @dock.return(@canoe)
+    @dock.rent(@sup_1, @eugene)
+    @dock.rent(@sup_2, @eugene)
+    5.times { @dock.log_hour }
+    @dock.return(@sup_1)
+    @dock.return(@sup_2)
+    expected = {:kayak => 4, :canoe => 1, :standup_paddle_board => 10}
+    assert_equal expected, @dock.total_hours_by_rental_type
+  end
 
 end
