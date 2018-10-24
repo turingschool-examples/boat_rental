@@ -30,7 +30,7 @@ class DockTest < Minitest::Test
     dock.rent(kayak_1, ringo)
 
     assert_instance_of Renter, dock.renters.last
-    assert_instance_of Boat, dock.boats.last 
+    assert_instance_of Boat, dock.boats.last
   end
 
   def test_dock_can_log_hours
@@ -64,6 +64,12 @@ class DockTest < Minitest::Test
 
 
     assert_equal 60, dock.revenue
+  end
+
+  def test_charges
+#if I had more time I would have had the methods work off of @boats_and_owners
+#so that the owners were better connected with their boats. The thought crossed
+#my mind but I wanted to make sure I could finish this iteration. 
   end
 
 end
