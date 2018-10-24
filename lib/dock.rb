@@ -1,11 +1,12 @@
 require 'pry'
 class Dock
-  attr_reader :name, :max_rental_time, :revenue, :rented_boats
+  attr_reader :name, :max_rental_time, :revenue, :rented_boats, :charges
   def initialize(name, max_rental_time)
     @name = name
     @max_rental_time = max_rental_time
     @revenue = 0
     @rented_boats = []
+    @charges = {}
   end
 
   def rent(boat, name)
@@ -28,9 +29,9 @@ class Dock
     else
       hours_charged = returned_boat.keys[0].hours_rented
     end
+    #@charges << [returned_boat.values[0].credit_card_number] => 
     @revenue += hours_charged * returned_boat.keys[0].price_per_hour
     returned_boat.keys[0].reset_hours
     @rented_boats.delete(returned_boat)
-
   end
 end
