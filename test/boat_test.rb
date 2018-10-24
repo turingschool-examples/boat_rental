@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require 'lib/boat'
+require './lib/boat'
 
 class BoatTest < Minitest::Test
   def setup
