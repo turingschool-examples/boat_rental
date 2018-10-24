@@ -8,6 +8,7 @@ class Dock
     @active_rentals  = []
     @active_renters  = []
     @return_boat     = []
+    @total_charges   = Hash.new(0)
   end
 
   def rent(boat, renter)
@@ -39,4 +40,15 @@ class Dock
     total.sum
   end
 
+  def zippidy_do_da
+    @active_renters.zip(@active_rentals)
+  end
+
+  def charges
+    zippidy_do_da.each do |renter|
+      @total_charges[renter.first.credit_card_number] = renter.last.price_per_hour * 3
+    end
+    @total_charges
+    # require 'pry';binding.pry
+  end
 end
