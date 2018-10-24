@@ -17,10 +17,9 @@ class DockTest < Minitest::Test
     assert_equal "The Rowing Dock", dock.name
   end
 
-end
+  def test_it_has_a_max_rental_time
+    dock = Dock.new("The Rowing Dock", 3)
+    assert_equal 3, dock.max_rental_time
+  end
 
-# pry(main)> dock.name
-# #=> "The Rowing Dock"
-#
-# pry(main)> dock.max_rental_time
-# #=> 3
+end
