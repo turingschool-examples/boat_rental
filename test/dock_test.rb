@@ -29,26 +29,26 @@ class DockTest < Minitest::Test
   end
 
   def test_it_can_log_hours
-skip
     dock = Dock.new("The Rowing Dock", 3)
     kayak_1 = Boat.new(:kayak, 20)
     patrick = Renter.new("Patrick Star", "4242424242424242")
     dock.rent(kayak_1, patrick)
-    assert_equal , dock.log_hour    
+    assert_equal 1, dock.log_hour
   end
 
-
+  # def test_it_can_return
+  #   dock = Dock.new("The Rowing Dock", 3)
+  #   kayak_1 = Boat.new(:kayak, 20)
+  #   patrick = Renter.new("Patrick Star", "4242424242424242")
+  #   dock.rent(kayak_1, patrick)
+  #   assert_equal ({}), dock.return(kayak_1)
+  # end
 
 end
 
 # pry(main)> dock.log_hour
 
-# pry(main)> dock.return(kayak_1)
-#
-# pry(main)> dock.return(kayak_2)
-#
-# pry(main)> dock.return(canoe)
-#
+
 # # Revenue thus far
 # pry(main)> dock.revenue
 # #=> 105
