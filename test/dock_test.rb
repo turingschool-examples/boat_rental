@@ -44,7 +44,7 @@ class DockTest < Minitest::Test
 
     result = @dock.rented_boats
 
-    result.each_with_index {|boat, index| assert boat == expected[index]}
+    assert_equal expected, result
   end
 
   def test_log_hours_updates_revenue_based_on_current_rented_boats
@@ -60,5 +60,16 @@ class DockTest < Minitest::Test
     @dock.log_hour
 
     assert_equal 105, @dock.revenue
+  end
+
+  def test_return_removes_boat_from_rented_boats
+    @dock.rent(@kayak_1, @patrick)
+    @dock.rent(@kayak_2, @patrick)
+
+    assert_equal [@kayak_1, @kayak_2], @dock.rented_boats
+
+    @dock.return(@kayak_1)
+
+    assert_equal [@kayak_2], @dock.rented_boats
   end
 end
