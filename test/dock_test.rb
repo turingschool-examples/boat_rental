@@ -104,6 +104,16 @@ class DockTest < Minitest::Test
   def test_total_hours_by_rental_type_returns_type_and_hour_pairs
 
     @dock.rent(@kayak_1, @patrick)
+    @dock.rent(@sup_1, @patrick)
+    @dock.log_hour
+    expected = {:kayak=>1, :standup_paddle_board=>1}
+    assert_equal expected, @dock.total_hours_by_rental_type
+
+  end
+
+  def test_total_hours_by_rental_type_correctly_in_complex_example_including_logs_past_max_rental_time
+
+    @dock.rent(@kayak_1, @patrick)
     @dock.rent(@kayak_2, @patrick)
     @dock.log_hour
     @dock.rent(@canoe, @patrick)
