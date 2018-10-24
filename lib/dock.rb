@@ -7,8 +7,8 @@ class Dock
     @rentals         = []
   end
 
-  def rent(type, renter)
-
+  def rent(type,renter)
+    @rentals << {:type=>type, :renter=>renter}
   end
 
   def log_hour
