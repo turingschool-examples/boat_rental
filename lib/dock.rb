@@ -35,4 +35,6 @@ class Dock
     @rented_boats.delete(boat)
   end
 
+  
+
 end
