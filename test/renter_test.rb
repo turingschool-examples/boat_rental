@@ -2,7 +2,6 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/renter'
 require './lib/dock'
-require 'pry'
 
 class RenterTest < Minitest::Test
   def test_a_renter_exists
