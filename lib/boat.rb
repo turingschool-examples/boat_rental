@@ -7,9 +7,19 @@ class Boat
     @type           = type
     @price_per_hour = price_per_hour
     @hours_rented   = 0
+    @rented         = false
   end
 
   def add_hour
     @hours_rented += 1
   end
+
+  def rent_now
+    @rented = true
+  end
+
+  def rented?
+    @rented
+  end
+
 end
