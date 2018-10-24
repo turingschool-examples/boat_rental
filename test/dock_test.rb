@@ -11,6 +11,9 @@ class DockTest < Minitest::Test
     @kayak_1 = Boat.new(:kayak, 20)
     @kayak_2 = Boat.new(:kayak, 20)
     @canoe = Boat.new(:canoe, 25)
+
+    @patrick = Renter.new("Patrick Star", "4242424242424242")
+    @eugene = Renter.new("Eugene Crabs", "1313131313131313")
   end
 
   def test_it_exists
@@ -34,6 +37,13 @@ class DockTest < Minitest::Test
   end
 
   def test_it_keeps_track_of_rented_boats
-    assert_equal []
+    expected = [@kayak_1, @kayak_2]
+
+    @dock.rent(@kayak_1, @patrick)
+    @dock.rent(@kayak_2, @patrick)
+
+    result = @dock.boats
+
+    result.each_with_index {|boat, index| assert boat == expected[index]}
   end
 end
