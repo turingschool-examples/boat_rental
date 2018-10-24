@@ -34,14 +34,9 @@ class Dock
   end
 
   def rented?(boat)
-    find_boat(boat) != nil
-  end
-
-  def find_boat(boat)
-    selected_boat = @rented_boats.find do |rented_boat|
+    @rented_boats.any? do |rented_boat|
       rented_boat[:boat] == boat
     end
-    selected_boat[:boat] unless selected_boat == nil
   end
 
   def return(boat)

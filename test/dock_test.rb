@@ -60,8 +60,10 @@ class DockTest < Minitest::Test
     @dock.rent(@kayak_1, @patrick)
     @dock.log_hour
     assert_equal true, @dock.rented?(@kayak_1)
+    assert_equal [{boat: @kayak_1, renter: @patrick}], @dock.rented_boats
     @dock.return(@kayak_1)
     assert_equal false, @dock.rented?(@kayak_1)
+    assert_equal [], @dock.rented_boats
     @dock.rent(@kayak_1, @patrick)
     assert_equal 0, @dock.hours_logged_by_boat(@kayak_1)
   end
