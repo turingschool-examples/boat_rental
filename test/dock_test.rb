@@ -29,7 +29,7 @@ class DockTest < Minitest::Test
   end
 
   def test_it_starts_with_no_rented_boats
-    assert_empty @dock.boats
+    assert_empty @dock.rented_boats
   end
 
   def test_it_start_with_zero_revenue
@@ -42,8 +42,12 @@ class DockTest < Minitest::Test
     @dock.rent(@kayak_1, @patrick)
     @dock.rent(@kayak_2, @patrick)
 
-    result = @dock.boats
+    result = @dock.rented_boats
 
     result.each_with_index {|boat, index| assert boat == expected[index]}
+  end
+
+  def test_renting_updates_revenue_based_on_boats
+    skip
   end
 end
