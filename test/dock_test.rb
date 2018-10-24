@@ -34,13 +34,12 @@ class DockTest < Minitest::Test
     dock.log_hour
     dock.log_hour
     dock.log_hour
-    binding.pry
     expected = 3
 
     assert_equal expected, dock.hours
   end
 
-  def test_that_it_can_charge_per_hour_for_boat_rental
+  def test_that_it_can_charge_per_hour_for__separate_boat_rental
     dock = Dock.new("The Rowing Dock", 3)
     kayak_1 = Boat.new(:kayak, 20)
     kayak_2 = Boat.new(:kayak, 20)
@@ -52,9 +51,11 @@ class DockTest < Minitest::Test
     dock.log_hour
     dock.charge_for_boat(kayak_1)
     dock.charge_for_boat(kayak_2)
-    #this is failing because it ISNT tracking hours seperately
-    #something to do with the rent method and tracking EACH boat
-    # in a seperate way
+    # this is failing because it ISNT tracking hours separately
+    # something to do with the rent method and tracking EACH boat's
+    # hours in a separate way
+    # the hours aren't separated so its adding 60 for the first kayak
+    # and 60 for the second one, even though it's only 20
     assert_equal 80, dock.revenue
   end
 
