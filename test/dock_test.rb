@@ -101,6 +101,8 @@ class DockTest < Minitest::Test
   end
 
   def test_it_hols_total_hours_per_rental_type
+    helper_patrick
+    helper_eugene
     expected = {:kayak => 4, :canoe => 1, :standup_paddle_board => 10}
     assert_equal expected, @dock.total_hours_by_rental_type
   end
