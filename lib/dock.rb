@@ -4,37 +4,43 @@ require 'pry'
 
 class Dock
 
-attr_reader :name, :max_rental_time, :log_hour, :rented_boats
+attr_reader :name, :max_rental_time, :log_hour, :boats, :renters
 
   def initialize(name, max_rental_time)
     @name = name
     @max_rental_time = max_rental_time
     @log_hour = 0
-    @rented_boats = {}
+    @boats = []
+    @renters = []
   end
 
-  def rent(boat, customer)
-    @rented_boats[boat] = customer
+  def rent(boat, renters)
+    @boats << boat
+    if @renters.include?(renters)
+    else
+    @renters << renters
+    end
   end
 
   def log_hour
-    binding.pry
-    @rented_boats[boat][hours_rented] += 1
+    @boats.each do |boat|
+      boat.add_hour
+    end
   end
 
   def return(boat)
-    hours = if boat.hours_rented > 3
+    @hours_rented = if boat.hours_rented > 3
       3
     else
     boat.hours_rented
     end
-    hours
+    @hours_rented
   end
 
   def revenue
-    return(boat)
-    revenue = @rented_boats.each do |boat|
-      boat.price_per_hour * hours
+    revenue = 0
+    @boats.each do |boat|
+      revenue = @price_per_hour * @rented_hours
     end
     revenue.sum
   end

@@ -26,7 +26,7 @@ class DockTest < Minitest::Test
   end
 
   def test_it_can_calulate_revenue
-    
+
   dock = Dock.new("The Rowing Dock", 3)
   kayak_1 = Boat.new(:kayak, 20)
   kayak_2 = Boat.new(:kayak, 20)
@@ -39,15 +39,17 @@ class DockTest < Minitest::Test
   # Rent Boats out to first Renter
   dock.rent(kayak_1, patrick)
   dock.rent(kayak_2, patrick)
-  # assert_equal ({"kayak_1" => "patrick", "kayak_2" => "patrick"}), dock.rented_boats
-  dock.log_hour
-  dock.rent(canoe, patrick)
-  dock.log_hour
-  dock.return(kayak_1)
-  dock.return(kayak_2)
-  dock.return(canoe)
-  # Revenue thus far
-  dock.revenue
+  assert_equal [kayak_1, kayak_2], dock.boats
+  assert_equal [patrick], dock.renters
+
+   dock.log_hour
+   dock.rent(canoe, patrick)
+   dock.log_hour
+   dock.return(kayak_1)
+   dock.return(kayak_2)
+   dock.return(canoe)
+   # Revenue thus far
+   dock.revenue
   #=> 105
   end
 
