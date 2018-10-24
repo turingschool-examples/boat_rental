@@ -32,7 +32,7 @@ class DockTest < Minitest::Test
       kayak_1 = Boat.new(:kayak, 20)
       patrick = Renter.new("Patrick Star", "4242424242424242")
       dock.rent(kayak_1, patrick)
-      assert_equal [{boat: kayak_1, renter: patrick}], dock.rented_boats 
+      assert_equal [{boat: kayak_1, renter: patrick, charges: 0}], dock.rented_boats 
     end
     
     def test_it_can_log_hours_for_rented_boats
@@ -53,6 +53,14 @@ class DockTest < Minitest::Test
       assert_equal [], dock.rented_boats
     end
     
+    def test_it_can_keep_track_of_all_boats
+      dock = Dock.new("The Rowing Dock", 3)
+      kayak_1 = Boat.new(:kayak, 20)
+      patrick = Renter.new("Patrick Star", "4242424242424242")
+      dock.rent(kayak_1, patrick)
+      dock.return(kayak_1)
+      assert_equal [{boat: kayak_1, renter: patrick, charges: 0}], dock.all_boats
+    end
     
     def test_it_can_calculate_revenue
       dock = Dock.new("The Rowing Dock", 3)
