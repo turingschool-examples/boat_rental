@@ -22,4 +22,14 @@ class BoatTest < Minitest::Test
   def test_it_start_with_zero_for_hours_rented
     assert_equal 0, @boat.hours_rented
   end
+
+  def test_it_can_add_hours_to_hours_rented
+    assert_equal 0, @boat.hours_rented
+
+    @boat.add_hour
+    @boat.add_hour
+    @boat.add_hour
+
+    assert_equal 3, @boat.hours_rented
+  end
 end
