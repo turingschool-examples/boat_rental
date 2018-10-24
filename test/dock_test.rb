@@ -3,6 +3,7 @@ require 'minitest/pride'
 require './lib/dock'
 require './lib/boat'
 require './lib/renter'
+require 'pry'
 
 class DockTest < Minitest::Test
     
@@ -26,7 +27,35 @@ class DockTest < Minitest::Test
       assert_equal 0, dock.revenue
     end
     
+    def test_it_can_rent_out_boats
+      dock = Dock.new("The Rowing Dock", 3)
+      kayak_1 = Boat.new(:kayak, 20)
+      patrick = Renter.new("Patrick Star", "4242424242424242")
+      dock.rent(kayak_1, patrick)
+      assert_equal [{boat: kayak_1, renter: patrick}], dock.rented_boats 
+    end
+    
+    def test_it_can_log_hours_for_rented_boats
+      dock = Dock.new("The Rowing Dock", 3)
+      kayak_1 = Boat.new(:kayak, 20)
+      patrick = Renter.new("Patrick Star", "4242424242424242")
+      dock.rent(kayak_1, patrick)
+      dock.log_hour
+      assert_equal 1, kayak_1.hours_rented
+    end
+    
+    def test_it_can_return_rented_boats
+      dock = Dock.new("The Rowing Dock", 3)
+      kayak_1 = Boat.new(:kayak, 20)
+      patrick = Renter.new("Patrick Star", "4242424242424242")
+      dock.rent(kayak_1, patrick)
+      dock.return(kayak_1)
+      assert_equal [], dock.rented_boats
+    end
+    
+    
     def test_it_can_calculate_revenue
+      skip
       dock = Dock.new("The Rowing Dock", 3)
       kayak_1 = Boat.new(:kayak, 20)
       kayak_2 = Boat.new(:kayak, 20)    
