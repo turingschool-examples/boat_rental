@@ -97,4 +97,17 @@ class DockTest < Minitest::Test
 
     assert_equal [@kayak_2], @dock.rented_boats
   end
+
+  def test_log_hours_increments_hours_rented_for_each_boat
+    @dock.rent(@kayak_1, @patrick)
+    @dock.rent(@kayak_2, @patrick)
+
+    @dock.rented_boats.each {|boat| assert boat.hours_rented == 0}
+
+    @dock.log_hour
+    @dock.log_hour
+    @dock.log_hour
+
+    @dock.rented_boats.each {|boat| assert boat.hours_rented == 3}
+  end
 end
