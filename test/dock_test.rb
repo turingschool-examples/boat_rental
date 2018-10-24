@@ -20,5 +20,5 @@ class DockTest < Minitest::Test
     assert_equal 3, dock.max_rental_time
   end
 
-  
+
 end
