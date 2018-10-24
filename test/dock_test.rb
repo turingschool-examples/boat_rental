@@ -75,7 +75,16 @@ class DockTest < Minitest::Test
   end
 
   def test_charges_returns_credit_card_and_amount_charged_per_renter
+    @dock.rent(@kayak_1, @eugene)
+    @dock.rent(@sup_1, @patrick)
+    @dock.log_hour
+    @dock.return(@sup_1)
+    @dock.return(@kayak_1)
+    expected = {"4242424242424242"=>15, "1313131313131313"=>20}
+    assert_equal expected, @dock.charges
+  end
 
+  def test_charges_returns_correctly_in_two_customer_example
     @dock.rent(@kayak_1, @patrick)
     @dock.rent(@kayak_2, @patrick)
     @dock.log_hour
