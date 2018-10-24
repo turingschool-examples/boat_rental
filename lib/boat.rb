@@ -11,4 +11,8 @@ class Boat
     @hours_rented += 1
   end
 
+  def reset_hours
+    @hours_rented = 0
+  end
+
 end

@@ -33,4 +33,57 @@ class DockTest < Minitest::Test
     assert_equal [], @dock.rented_boats
   end
 
+  def test_it_rents_boats
+    @dock.rent(@kayak_1, @patrick)
+    assert_equal [@kayak_1], @dock.rented_boats
+  end
+
+  def test_it_logs_hour
+    @dock.rent(@kayak_1, @patrick)
+    @dock.rent(@kayak_2, @patrick)
+    @dock.log_hour
+    assert_equal 1, @dock.rented_boats[0].hours_rented
+    assert_equal 1, @dock.rented_boats[1].hours_rented
+  end
+
+  def test_it_has_total_revenue
+    assert_equal 0, @dock.revenue
+  end
+
+  def test_it_returns_boats
+    @dock.rent(@kayak_1, @patrick)
+    @dock.log_hour
+    @dock.rent(@canoe, @patrick)
+    @dock.log_hour
+    @dock.return(@kayak_1)
+    @dock.return(@canoe)
+    assert_equal [], @dock.rented_boats
+  end
+
+  def test_it_returns_revenue
+    @dock.rent(@kayak_1, @patrick)
+    @dock.rent(@kayak_2, @patrick)
+    @dock.log_hour
+    @dock.rent(@canoe, @patrick)
+    @dock.log_hour
+    @dock.return(@kayak_1)
+    @dock.return(@kayak_2)
+    @dock.return(@canoe)
+    assert_equal 105, @dock.revenue
+  end
+
+  def test_it_resets_hours
+    @dock.rent(@kayak_1, @patrick)
+    @dock.rent(@kayak_2, @patrick)
+    @dock.log_hour
+    @dock.rent(@canoe, @patrick)
+    @dock.log_hour
+    @dock.return(@kayak_1)
+    @dock.return(@kayak_2)
+    @dock.return(@canoe)
+    assert_equal 0, @kayak_1.hours_rented
+    assert_equal 0, @kayak_2.hours_rented
+    assert_equal 0, @canoe.hours_rented
+  end
+
 end

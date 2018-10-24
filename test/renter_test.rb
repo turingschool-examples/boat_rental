@@ -13,12 +13,10 @@ class RenterTest < Minitest::Test
   end
 
   def test_it_has_name
-    skip
     assert_equal "Patrick Star", @renter.name
   end
 
   def test_it_has_credit_card
-    skip
     assert_equal "4242424242424242", @renter.credit_card_number
   end
 
