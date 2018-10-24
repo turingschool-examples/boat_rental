@@ -34,6 +34,7 @@ class DockTest < Minitest::Test
   end
 
   def test_log_hour_causes_revenue_to_increase_when_boats_are_rented_accross_hours_with_variable_amounts_of_boats_not_having_been_returned
+
     @dock.rent(@kayak_1, @patrick)
     @dock.rent(@kayak_2, @patrick)
     @dock.log_hour
@@ -41,8 +42,6 @@ class DockTest < Minitest::Test
     @dock.return(@kayak_2)
     @dock.rent(@canoe, @patrick)
     @dock.log_hour
-    @dock.return(@kayak_1)
-    @dock.return(@kayak_2)
     @dock.return(@canoe)
     # Revenue thus far
     assert_equal 105, @dock.revenue
@@ -50,6 +49,7 @@ class DockTest < Minitest::Test
 
 
   def test_log_hour_with_second_customer_renting_past_max_but_not_being_charged_for_extra
+
     @dock.rent(@kayak_1, @patrick)
     @dock.rent(@kayak_2, @patrick)
     @dock.log_hour
@@ -57,8 +57,6 @@ class DockTest < Minitest::Test
     @dock.return(@kayak_2)
     @dock.rent(@canoe, @patrick)
     @dock.log_hour
-    @dock.return(@kayak_1)
-    @dock.return(@kayak_2)
     @dock.return(@canoe)
     # Rent Boats out to second Renter
     @dock.rent(@sup_1, @eugene)
@@ -77,6 +75,7 @@ class DockTest < Minitest::Test
   end
 
   def test_charges_returns_credit_card_and_amount_charged_per_renter
+    skip
     @dock.rent(@kayak_1, @patrick)
     @dock.rent(@kayak_2, @patrick)
     @dock.log_hour
@@ -84,8 +83,6 @@ class DockTest < Minitest::Test
     @dock.return(@kayak_2)
     @dock.rent(@canoe, @patrick)
     @dock.log_hour
-    @dock.return(@kayak_1)
-    @dock.return(@kayak_2)
     @dock.return(@canoe)
     # Rent Boats out to second Renter
     @dock.rent(@sup_1, @eugene)
@@ -104,7 +101,8 @@ class DockTest < Minitest::Test
     assert_equal expected, @dock.charges
   end
 
-  def test_charges_returns_credit_card_and_amount_charged_per_renter
+  def test_total_charges_by_rental_type_returns_type_and_hour_pairs
+    skip
     @dock.rent(@kayak_1, @patrick)
     @dock.rent(@kayak_2, @patrick)
     @dock.log_hour
@@ -112,8 +110,6 @@ class DockTest < Minitest::Test
     @dock.return(@kayak_2)
     @dock.rent(@canoe, @patrick)
     @dock.log_hour
-    @dock.return(@kayak_1)
-    @dock.return(@kayak_2)
     @dock.return(@canoe)
     # Rent Boats out to second Renter
     @dock.rent(@sup_1, @eugene)
