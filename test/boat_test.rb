@@ -30,4 +30,5 @@ class BoatTest < Minitest::Test
     assert_equal 3, kayak.hours_rented
   end
 
+
 end
