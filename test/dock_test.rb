@@ -13,6 +13,6 @@ class DockTest < Minitest::Test
     assert_equal "The Rowing Dock", @dock.name
   end
   def test_it_can_be_initialized_with_max_rental_time
-    assert_equal "The Rowing Dock", @dock.max_rental_time
+    assert_equal 3, @dock.max_rental_time
   end
 end
