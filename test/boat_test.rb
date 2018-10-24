@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/boat'
 
-class MerchantTest < Minitest::Test
+class BoatTest < Minitest::Test
   def setup
     @kayak = Boat.new(:kayak, 20)
   end
