@@ -35,7 +35,8 @@ class Dock
     delete_this_boat = @boats.find_index do |ship|
       ship == boat
     end
-    @boats.delete_at(0)
+    @boats.delete_at(delete_this_boat)
   end
+
 
 end

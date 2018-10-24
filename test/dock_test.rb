@@ -30,7 +30,7 @@ class DockTest < Minitest::Test
     dock.rent(kayak_1, ringo)
 
     assert_instance_of Renter, dock.renters.last
-    assert_instance_of Boat, dock.boats.last
+    assert_instance_of Boat, dock.boats.last 
   end
 
   def test_dock_can_log_hours
@@ -60,7 +60,7 @@ class DockTest < Minitest::Test
     dock.log_hour
     dock.log_hour
     dock.log_hour # should add 20 to 40 (60)
-    dock.log_hour # shouldn't add anything 
+    dock.log_hour # shouldn't add anything
 
 
     assert_equal 60, dock.revenue
