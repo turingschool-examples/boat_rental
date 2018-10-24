@@ -103,6 +103,5 @@ class DockTest < Minitest::Test
       
       assert_equal 195, dock.revenue
     end
-    
   
 end

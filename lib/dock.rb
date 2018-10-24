@@ -22,12 +22,16 @@ class Dock
     returned_boat = @rented_boats.find do |r_boat|
       r_boat[:boat] == boat
     end
-    if returned_boat[:boat].hours_rented > @max_rental_time
-      @revenue += returned_boat[:boat].price_per_hour * @max_rental_time
-    else
-      @revenue += returned_boat[:boat].price_per_hour * returned_boat[:boat].hours_rented
-    end
+    calculate_revenue(returned_boat[:boat])
     @rented_boats.delete(returned_boat)
+  end
+  
+  def calculate_revenue(boat)
+    if boat.hours_rented > @max_rental_time
+      @revenue += boat.price_per_hour * @max_rental_time
+    else
+      @revenue += boat.price_per_hour * boat.hours_rented
+    end
   end
   
 end
