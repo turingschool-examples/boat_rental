@@ -12,19 +12,11 @@ class BoatTest < Minitest::Test
     assert_equal :kayak, @boat.type
     assert_equal 20, @boat.price_per_hour
   end
+  def test_hours_rented_starts_at_0
+    assert_equal 0, @boat.hours_rented
+  end
 end
 
-
-
-# pry(main)> kayak = Boat.new(:kayak, 20)
-# #=> #<Boat:0x00007fceac8f0480...>
-#
-# pry(main)> kayak.type
-# #=> :kayak
-#
-# pry(main)> kayak.price_per_hour
-# #=> 20
-#
 # pry(main)> kayak.hours_rented
 # #=> 0
 #
