@@ -10,4 +10,10 @@ class Dock
   def rent(boat, name)
     @rented_boats << boat
   end
+
+  def log_hour
+    @rented_boats.each do |boat|
+      boat.add_hour
+    end
+  end
 end
