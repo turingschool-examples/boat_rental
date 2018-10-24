@@ -1,16 +1,13 @@
 class Boat
-  attr_reader :type
+  attr_reader :type, :price_per_hour
 
-  def initialize(type, quantity)
+  def initialize(type, price_per_hour)
     @type = type
-    @quantity = quantity
+    @price_per_hour = price_per_hour
   end
 end
 
 
-# pry(main)> kayak.price_per_hour
-# #=> 20
-#
 # pry(main)> kayak.hours_rented
 # #=> 0
 #
