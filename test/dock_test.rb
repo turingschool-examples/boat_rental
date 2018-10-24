@@ -33,7 +33,27 @@ class DockTest < Minitest::Test
     dock.add_boats_to_inventory(canoe)
     dock.add_boats_to_inventory(sup_1)
     dock.add_boats_to_inventory(sup_2)
-    assert_equal [kayak_1, kayak_2, canoe, sup_1, sup_2], dock.boat_inventory
+    assert_equal 5, dock.boat_inventory.count
   end
+
+  # def test_can_add_renters
+  #   dock = Dock.new("The Rowing Dock", 3)
+  #   patrick = Renter.new("Patrick Star", "4242424242424242")
+  #   eugene = Renter.new("Eugene Crabs", "1313131313131313")
+  #   dock.add_renter(patrick)
+  #   dock.add_renter(eugene)
+  #   assert_equal [patrick, eugene], dock.total_renters
+  # end
+
+  # def test_log_hour_adds_one_when_first_called
+  #   dock = Dock.new("The Rowing Dock", 3)
+  #   patrick = Renter.new("Patrick Star", "4242424242424242")
+  #   # eugene = Renter.new("Eugene Crabs", "1313131313131313")
+  #   kayak_1 = Boat.new(:kayak, 20)
+  #   kayak_2 = Boat.new(:kayak, 20)
+  #   dock.rent(kayak_1, patrick)
+  #   dock.rent(kayak_2, patrick)
+  #   assert_equal 1, dock.log_hour
+  # end
 
 end
