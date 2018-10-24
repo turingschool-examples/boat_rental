@@ -19,5 +19,5 @@ class RenterTest < Minitest::Test
 
     assert_equal "4242424242424242", renter.credit_card_number
   end
-  
+
 end
