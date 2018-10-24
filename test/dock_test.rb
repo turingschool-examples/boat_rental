@@ -142,5 +142,36 @@ class DockTest < Minitest::Test
       expected = {"4242424242424242" => 105, "1313131313131313" => 90}
       assert_equal expected, dock.charges
     end
+    
+    def test_it_can_calculate_total_hours_by_rental_type
+      dock = Dock.new("The Rowing Dock", 3)
+      kayak_1 = Boat.new(:kayak, 20)
+      kayak_2 = Boat.new(:kayak, 20)    
+      canoe = Boat.new(:canoe, 25)    
+      sup_1 = Boat.new(:standup_paddle_board, 15)    
+      sup_2 = Boat.new(:standup_paddle_board, 15)    
+      patrick = Renter.new("Patrick Star", "4242424242424242")
+      eugene = Renter.new("Eugene Crabs", "1313131313131313")    
+      dock.rent(kayak_1, patrick)
+      dock.rent(kayak_2, patrick)
+      dock.log_hour
+      dock.rent(canoe, patrick)
+      dock.log_hour
+      dock.return(kayak_1)
+      dock.return(kayak_2)
+      dock.return(canoe)
+      dock.rent(sup_1, eugene)
+      dock.rent(sup_2, eugene)
+      dock.log_hour
+      dock.log_hour
+      dock.log_hour
+      dock.log_hour
+      dock.log_hour
+      dock.return(sup_1)
+      dock.return(sup_2)
+      
+      expected = {:kayak => 4, :canoe => 1, :standup_paddle_board => 10}
+      assert_equal expected, dock.total_hours_by_rental_type
+    end
   
 end

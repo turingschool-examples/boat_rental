@@ -53,4 +53,12 @@ class Dock
     end
     charges
   end
+  
+  def total_hours_by_rental_type
+    hours = Hash.new(0)
+    @all_boats.each do |boat|
+      hours[boat[:boat].type] += boat[:boat].hours_rented
+    end
+    hours
+  end
 end
