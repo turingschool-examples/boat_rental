@@ -19,11 +19,13 @@ class Dock
     end
   end
   def return(boat)
-    chargeable_hours = boat.hours_rented < @max_rental_time ? boat.hours_rented : @max_rental_time
     credit_card_number = @boats_being_rented[boat].credit_card_number
-    amount_charged = chargeable_hours * boat.price_per_hour
+    amount_charged = chargeable_hours(boat) * boat.price_per_hour
     @charges[credit_card_number] += amount_charged
     @revenue += amount_charged
     @boats_being_rented.delete(boat)
+  end
+  def chargeable_hours(boat)
+    boat.hours_rented < @max_rental_time ? boat.hours_rented : @max_rental_time
   end
 end
