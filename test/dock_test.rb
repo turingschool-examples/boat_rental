@@ -69,5 +69,15 @@ class DockTest < Minitest::Test
     assert_equal 0, @dock.current_rentals.count
   end
 
+  def test_it_does_not_charge_over_max_rental_time
+    kayak_1 = Boat.new(:kayak, 20)
+    patrick = Renter.new("Patrick Star", "4242424242424242")
+
+    @dock.rent(kayak_1, patrick)
+    5.times { @dock.log_hour }
+
+    assert_equal 3, @dock.current_rentals[0][:boat].hours_rented
+  end
+
 
 end
