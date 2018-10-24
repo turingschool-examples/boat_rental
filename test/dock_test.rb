@@ -25,7 +25,7 @@ class DockTest < Minitest::Test
     dock = Dock.new("The Rowing Dock", 3)
     kayak_1 = Boat.new(:kayak, 20)
     patrick = Renter.new("Patrick Star", "4242424242424242")
-    assert_equal [kayak_1, 0, patrick], dock.rent(kayak_1, patrick)
+    assert_equal [[kayak_1, 0, patrick]], dock.rent(kayak_1, patrick)
   end
 
   def test_it_can_get_revenue_for_renting_boat

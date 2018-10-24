@@ -1,4 +1,5 @@
-require 'time'
+require './lib/boat'
+require './lib/renter'
 
 class Dock
   attr_reader :name,
@@ -10,5 +11,7 @@ class Dock
   end
 
   def rent(boat, renter)
-    
+    @rented_boats << [boat, boat.hours_rented, renter]
   end
+
+end 
