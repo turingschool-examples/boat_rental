@@ -35,6 +35,8 @@ class Dock
     @rented_boats.delete(boat)
   end
 
-  
+  def revenue
+    @charges.sum
+  end
 
 end
