@@ -73,7 +73,7 @@ class DockTest < Minitest::Test
     dock.rent(sup_1, eugene)
     dock.rent(sup_2, eugene)
     dock.log_hour
-    dock.log_hour
+    dock.log_hreour
     dock.log_hour
     dock.log_hour
     dock.log_hour
