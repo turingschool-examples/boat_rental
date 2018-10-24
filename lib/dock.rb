@@ -29,7 +29,7 @@ class Dock
   end
 
   def revenue
-    total = @active_rentals.map do |rental|
+    total = @return_boat.map do |rental|
       if rental.hours_rented > @max_rental_time
         rental.price_per_hour * @max_rental_time
       else
@@ -37,7 +37,6 @@ class Dock
       end
     end
     total.sum
-    # require 'pry';binding.pry
   end
 
 end
