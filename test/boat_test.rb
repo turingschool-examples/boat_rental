@@ -3,19 +3,19 @@ require './lib/boat'
 
 class BoatTest < Minitest::Test
   def setup
-    @boat = Boat.new
+    @boat = Boat.new(:kayak, 20)
   end
   def test_it_exists
     assert_instance_of Boat, @boat
   end
+  def test_it_can_be_initialized_with_type_and_price_per_hour
+    assert_equal :kayak, @boat.type
+    assert_equal 20, @boat.price_per_hour
+  end
 end
 
 
-#
-# ```ruby
-# pry(main)> require './lib/boat'
-# #=> true
-#
+
 # pry(main)> kayak = Boat.new(:kayak, 20)
 # #=> #<Boat:0x00007fceac8f0480...>
 #
