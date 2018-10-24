@@ -27,7 +27,6 @@ class DockTest < Minitest::Test
     patrick = Renter.new("Patrick Star", "4242424242424242")
     dock.rent(kayak_1, patrick)
     assert_equal [kayak_1], dock.rented_boats
-    assert_equal [patrick], dock.renters
   end
 
   def test_it_can_rent_and_return_boat
@@ -47,9 +46,7 @@ class DockTest < Minitest::Test
     dock.return(kayak_1)
     dock.return(kayak_2)
     dock.return(canoe)
-    expected = []
-    assert_equal expected, dock.rented_boats
-    assert_equal [40, 40, 25], dock.charges
+    assert_equal 105, dock.revenue
     assert_equal 2, kayak_1.hours_rented
   end
 
