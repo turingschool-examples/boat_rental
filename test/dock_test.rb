@@ -37,7 +37,10 @@ class DockTest < Minitest::Test
   end
 
   def test_it_keeps_track_of_rented_boats
-    expected = [@kayak_1, @kayak_2]
+    expected = [
+      {boat: @kayak_1, renter_card_info: "4242424242424242"},
+      {boat: @kayak_2, renter_card_info: "4242424242424242"}
+    ]
 
     @dock.rent(@kayak_1, @patrick)
     @dock.rent(@kayak_2, @patrick)
@@ -91,23 +94,60 @@ class DockTest < Minitest::Test
     @dock.rent(@kayak_1, @patrick)
     @dock.rent(@kayak_2, @patrick)
 
-    assert_equal [@kayak_1, @kayak_2], @dock.rented_boats
+    expected = [
+      {boat: @kayak_1, renter_card_info: "4242424242424242"},
+      {boat: @kayak_2, renter_card_info: "4242424242424242"}
+    ]
+
+    assert_equal expected, @dock.rented_boats
 
     @dock.return(@kayak_1)
 
-    assert_equal [@kayak_2], @dock.rented_boats
+    expected = [{boat: @kayak_2, renter_card_info: "4242424242424242"}]
+    result = @dock.rented_boats
+
+    result.each_with_index do |boat_hash, index|
+      assert boat_hash == expected[index]
+    end
   end
 
   def test_log_hours_increments_hours_rented_for_each_boat
     @dock.rent(@kayak_1, @patrick)
     @dock.rent(@kayak_2, @patrick)
 
-    @dock.rented_boats.each {|boat| assert boat.hours_rented == 0}
+    @dock.rented_boats.each do |boat_hash|
+      assert boat_hash[:boat].hours_rented == 0
+    end
 
     @dock.log_hour
     @dock.log_hour
     @dock.log_hour
 
-    @dock.rented_boats.each {|boat| assert boat.hours_rented == 3}
+    @dock.rented_boats.each do |boat_hash|
+      assert boat_hash[:boat].hours_rented == 3
+    end
+  end
+
+  def test_returning_a_boat_resets_hours_rented
+    @dock.rent(@kayak_1, @patrick)
+    @dock.rent(@kayak_2, @patrick)
+
+    @dock.rented_boats.each do |boat_hash|
+      assert boat_hash[:boat].hours_rented == 0
+    end
+
+    @dock.log_hour
+    @dock.log_hour
+    @dock.log_hour
+
+    @dock.rented_boats.each do |boat_hash|
+      assert boat_hash[:boat].hours_rented == 3
+    end
+
+    @dock.return(@kayak_1)
+    @dock.return(@kayak_2)
+
+    assert_equal 0, @kayak_1.hours_rented
+    assert_equal 0, @kayak_1.hours_rented
   end
 end
