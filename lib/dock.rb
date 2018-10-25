@@ -22,7 +22,8 @@ class Dock
 
   def log_hour
     @rented_boats.each do |boat|
-      if boat.rented_status == true
+      if boat.rented_status == true && boat.hours_rented < 3
+        # get feedback on the above boolean, what if both are false
         boat.hours_rented += 1
       end
     end
