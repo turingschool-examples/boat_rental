@@ -36,6 +36,9 @@ class Dock
     @total_revenue
   end
 
+  def charges
+  end
+
 
 
 end
