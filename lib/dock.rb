@@ -30,9 +30,11 @@ class Dock
 
   def revenue
     @rented_boats.each do |boat|
-      @total_revenue + (boat.hours_rented * boat.price_per_hour)
+      @total_revenue += (boat.hours_rented * boat.price_per_hour)
     end
     @total_revenue
   end
+
+
 
 end
