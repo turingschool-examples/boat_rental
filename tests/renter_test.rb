@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './renter/card'
+require './lib/renter'
 
 class RenterTest < Minitest::Test
 
