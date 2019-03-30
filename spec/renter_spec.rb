@@ -7,7 +7,7 @@ describe Renter do
   end
 
   it "has a name" do
-    expect(@renter.name)to eq("Patrick Star")
+    expect(@renter.name).to eq("Patrick Star")
   end
 
   it "has a credit card number" do
