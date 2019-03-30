@@ -41,4 +41,43 @@ class DockTest < Minitest::Test
     }
     assert_equal expected, dock.rental_log
   end
+
+  def test_it_can_charge_renter_of_boat
+    dock.rent(kayak_1, patrick)
+    dock.rent(kayak_2, patrick)
+    dock.rent(sup_1, eugene)
+    kayak_1.add_hour
+    kayak_1.add_hour
+    sup_1.add_hour
+    sup_1.add_hour
+
+    expected = {
+      card_number: "4242424242424242",
+      amount: 40
+    }
+
+    expected2 = {
+      card_number: "1313131313131313",
+      amount: 30
+    }
+
+    assert_equal expected, dock.charge(kayak_1)
+    assert_equal expected2, dock.charge(sup_1)
+  end
+
+  def test_it_wont_charge_more_time_than_the_docks_max_rental_time
+    dock.rent(sup_1, eugene)
+    sup_1.add_hour
+    sup_1.add_hour
+    sup_1.add_hour
+    sup_1.add_hour
+    sup_1.add_hour
+
+    expected = {
+      :card_number => "1313131313131313",
+      :amount => 45
+    }
+
+    assert_equal expected, dock.charge(sup_1)
+  end
 end
