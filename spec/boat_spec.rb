@@ -7,10 +7,10 @@ describe Boat do
   end
 
   it "has a type" do
-    expect(@kayak.type).to eq(:kayak)
+    @kayak = Boat.new(:kayak, 20)
   end
 
-  it "has a price per hour"
+  it "has a price per hour" do
     expect(@kayak.price_per_hour).to eq(20)
   end
 
