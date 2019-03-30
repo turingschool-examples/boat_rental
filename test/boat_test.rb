@@ -9,7 +9,7 @@ class BoatTest < Minitest::Test
   end
 
   def test_it_exists
-    assert_instance_of Board, kayak
+    assert_instance_of Boat, kayak
   end
 
   def test_it_has_attributes
