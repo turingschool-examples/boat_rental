@@ -31,9 +31,9 @@ describe Dock do
 
     it "has a rental log" do
       expected = {
-        @kayak_1 => @patrick
-        @kayak_2 => @patrick
-        @sup_1 => @eugene
+        @kayak_1 => @patrick,
+        @kayak_2 => @patrick,
+        @sup_1 => @eugene,
       }
 
       expect(@dock.rental_log).to eq(expected)
