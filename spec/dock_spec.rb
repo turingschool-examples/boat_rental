@@ -39,10 +39,11 @@ describe Dock do
       expect(@dock.rental_log).to eq(expected)
     end
 
-    context "add canoe and log hour for kayaks" do
+    context "add canoe, sup_2  and log hour for kayaks" do
 
       before do
         @canoe = Boat.new(:canoe, 25)
+        @sup_2 = Boat.new(:standup_paddle_board, 15)
         @dock.rent(@kayak_1, @patrick)
         @dock.rent(@kayak_2, @patrick)
         @dock.log_hour
@@ -55,26 +56,29 @@ describe Dock do
       end
 
       context "Return boats and log hours past dock maximum" do
-        @dock.return(@kayak_1)
-        @dock.return(@kayak_2)
-        @dock.return(@canoe)
-        @dock.rent(@sup_1, @eugene)
-        @dock.rent(@sup_2, @eugene)
-        @dock.log_hour
-        @dock.log_hour
-        @dock.log_hour
-        @dock.log_hour
-        @dock.log_hour
-      end
 
-      it "Calculates revenue with kayaks and canoe only" do
-        expect(@dock.revenue).to eq(105)
-      end
+        before do
+          @dock.return(@kayak_1)
+          @dock.return(@kayak_2)
+          @dock.return(@canoe)
+          @dock.rent(@sup_1, @eugene)
+          @dock.rent(@sup_2, @eugene)
+          @dock.log_hour
+          @dock.log_hour
+          @dock.log_hour
+          @dock.log_hour
+          @dock.log_hour
+        end
 
-      it "Totals revenue for all rentals" do
-        @dock.return(@sup_1)
-        @dock.return(@sup_2)
-        expect(@dock.revenue).to eq(195)
+        it "Calculates revenue with kayaks and canoe only" do
+          expect(@dock.revenue).to eq(105)
+        end
+
+        it "Totals revenue for all rentals" do
+          @dock.return(@sup_1)
+          @dock.return(@sup_2)
+          expect(@dock.revenue).to eq(195)
+        end
       end
     end
 
