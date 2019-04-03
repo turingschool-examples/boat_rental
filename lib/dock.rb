@@ -2,12 +2,13 @@ require './lib/boat'
 require './lib/renter'
 
 class Dock
-  attr_reader :name, :max_rental_time, :rental_log
+  attr_reader :name, :max_rental_time, :rental_log, :revenue
 
   def initialize(name, max_rental_time)
     @name = name
     @max_rental_time = max_rental_time
     @rental_log = {}
+    @revenue = 0
   end
 
   def rent(boat, renter)
@@ -30,6 +31,8 @@ class Dock
   end
 
   def return(boat)
+    renter = @rental_log[boat]
+    @revenue += charge(boat)[:amount]
     @rental_log.delete(boat)
   end
 end

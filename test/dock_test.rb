@@ -21,6 +21,10 @@ class DockTest < Minitest::Test
     assert_equal 3, @dock.max_rental_time
   end
 
+  def test_it_starts_with_no_revenue
+    assert_equal 0, @dock.revenue
+  end
+
   def test_rent_adds_to_rental_log_hash
     @dock.rent(@kayak_1, @patrick)
     @dock.rent(@kayak_2, @patrick)
@@ -76,11 +80,13 @@ class DockTest < Minitest::Test
     assert_equal 0, @sup_1.hours_rented
   end
 
-  def test_return_removes_boat_from_rental_log
+  def test_return_removes_boat_from_rental_log_and_increases_revenue
     @dock.rent(@kayak_1, @patrick)
     @dock.log_hour
     @dock.return(@kayak_1)
+    @dock.log_hour
 
     assert_equal ({}), @dock.rental_log
+    assert_equal 20, @dock.revenue
   end
 end
