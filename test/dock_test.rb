@@ -75,4 +75,12 @@ class DockTest < Minitest::Test
     assert_equal 1, @kayak_2.hours_rented
     assert_equal 0, @sup_1.hours_rented
   end
+
+  def test_return_removes_boat_from_rental_log
+    @dock.rent(@kayak_1, @patrick)
+    @dock.log_hour
+    @dock.return(@kayak_1)
+
+    assert_equal ({}), @dock.rental_log
+  end
 end
