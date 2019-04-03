@@ -64,4 +64,15 @@ class DockTest < Minitest::Test
 
     assert_equal expected, @dock.charge(@sup_1)
   end
+
+  def test_log_hour_increases_hours_rented_for_all_boats_in_use
+    @dock.rent(@kayak_1, @patrick)
+    @dock.rent(@kayak_2, @patrick)
+
+    @dock.log_hour
+
+    assert_equal 1, @kayak_1.hours_rented
+    assert_equal 1, @kayak_2.hours_rented
+    assert_equal 0, @sup_1.hours_rented
+  end
 end

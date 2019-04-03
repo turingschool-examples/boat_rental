@@ -22,4 +22,14 @@ class Dock
     charge_hash[:amount] = hours_charged * boat.price_per_hour
     charge_hash
   end
+
+  def log_hour
+    @rental_log.each do |boat, renter|
+      boat.add_hour
+    end
+  end
+
+  def return(boat)
+
+  end
 end
