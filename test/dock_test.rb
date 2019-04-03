@@ -1,8 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/dock'
-require './lib/renter'
-require './lib/boat'
 
 class DockTest < Minitest::Test
   def setup
@@ -35,5 +33,35 @@ class DockTest < Minitest::Test
     }
 
     assert_equal expected, @dock.rental_log
+  end
+
+  def test_charge_returns_hash_with_card_number_and_amount_to_be_charged
+    @dock.rent(@kayak_1, @patrick)
+    @dock.rent(@kayak_2, @patrick)
+    @kayak_1.add_hour
+    @kayak_1.add_hour
+
+    expected = {
+      card_number: "4242424242424242",
+      amount: 40
+    }
+
+    assert_equal expected, @dock.charge(@kayak_1)
+  end
+
+  def test_charge_returns_hash_with_card_number_and_amount_to_be_charged_up_to_max_rental_time
+    @dock.rent(@sup_1, @eugene)
+    @sup_1.add_hour
+    @sup_1.add_hour
+    @sup_1.add_hour
+    @sup_1.add_hour
+    @sup_1.add_hour
+
+    expected = {
+      card_number: "1313131313131313",
+      amount: 45
+    }
+
+    assert_equal expected, @dock.charge(@sup_1)
   end
 end

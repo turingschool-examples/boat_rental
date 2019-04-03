@@ -1,3 +1,6 @@
+require './lib/boat'
+require './lib/renter'
+
 class Dock
   attr_reader :name, :max_rental_time, :rental_log
 
@@ -9,5 +12,14 @@ class Dock
 
   def rent(boat, renter)
     @rental_log[boat] = renter
+  end
+
+  def charge(boat)
+    renter = @rental_log[boat]
+    hours_charged = [boat.hours_rented, @max_rental_time].min
+    charge_hash = {}
+    charge_hash[:card_number] = renter.credit_card_number
+    charge_hash[:amount] = hours_charged * boat.price_per_hour
+    charge_hash
   end
 end
