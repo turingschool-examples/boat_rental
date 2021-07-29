@@ -27,7 +27,7 @@ class Dock
   end
 
   def return(boat)
-    @revenue += self.charge(boat).fetch(:amount)
+    @revenue += charge(boat).fetch(:amount)
     @rental_log.delete(boat)
   end
 
