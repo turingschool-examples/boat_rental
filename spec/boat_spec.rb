@@ -1,4 +1,5 @@
 require './lib/boat'
+require './lib/renter'
 
 RSpec.describe do
   before(:each) do

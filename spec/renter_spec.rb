@@ -1,3 +1,4 @@
+require './lib/boat'
 require './lib/renter'
 
 RSpec.describe Renter do
